@@ -2,7 +2,7 @@
 
 El notebook generado toma las **localizaciones de muestreo** dadas por un fichero de entrada y 
 
-1. descarga información de precipitación y piezometría de dos fuentes de la red,
+1. descarga información de precipitación y piezometría en España de dos fuentes de la red,
 2. asocia cada una de las localizaciones con las ubicaciones en las que se han tomado las medidas de las magnitudes anteriores y, finalmente,
 3. genera ficheros CSV en los que se dan las medidas temporales de esas magnitudes para cada localización de muestreo.
 
