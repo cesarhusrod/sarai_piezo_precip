@@ -8,8 +8,7 @@ El notebook toma las **localizaciones de muestreo** dadas por un fichero de entr
 
 
 ## Install
-
-Únicamente es necesario importar el fichero *environment_sarai.yml* para generar el nuevo entorno que permita importar los paquetes y módulos que el código necesita.
+It's pretty simple: you need [anaconda](https://www.anaconda.com/) installed on your computer and import environment file *environment_sarai.yml*. It generates a new environment that allows the notebook to run without problems.
 
 
 ## Fuentes de datos
