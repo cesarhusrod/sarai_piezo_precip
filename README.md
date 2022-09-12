@@ -7,7 +7,7 @@ El notebook toma las **localizaciones de muestreo** dadas por un fichero de entr
 3. genera ficheros CSV en los que se dan las medidas temporales de esas magnitudes para cada localización de muestreo.
 
 
-## Instalación
+## Install
 
 Únicamente es necesario importar el fichero *environment_sarai.yml* para generar el nuevo entorno que permita importar los paquetes y módulos que el código necesita.
 
@@ -64,3 +64,15 @@ Ubicados en el directorio *output_dir* definido en el notebook.
 - *historico_piezometrias.csv*, con las medidas de piezometría correspondientes a la serie más larga de todos los piezometros que están a una distancia igual o inferior al radio del buffer de cada punto de muestreo (por defecto 5.000 m).
 
 - Ficheros de tipo JPG de todas las representaciones generadas en el notebook, tanto de distribución espacial como de estadísticas.
+
+## Contact
+
+My name is César Husillos Rodríguez. You can contact me just via GitHub or through our e-mails: c.husillos@igme.es.
+
+## License
+
+This project is licensed under the terms of the GNU General Public License v3.0
+
+## Example
+
+
