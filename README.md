@@ -21,49 +21,39 @@ This file must have the character ';' as the field delimiter. Sampling location 
    - *Master*, with precipitation grid coordinates and their IDs,
    - *historical precipitation file*, which contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31. 
   
-3. ****
-3. **Medidas de pieometría**, comprimido (ZIP). Es una base de datos MS Access accesible desde [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip), y que consta de dos tablas:
-   - Una que contiene informacion sobre los piezómetros y su ubicación (junto con su identificador)
-   - Otra, con medidas piezométricas.
+3. **Piezometrical measurements**. Coded again as internal notebook variable, it points as default as a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
+   - The first one contains information about piezometers and geographical locations (*WGS84*)
+   - The second one includes historical piezometrical measurements.
 
-## Directorios recomendados
+## Recommended structure of directories
+The notebook code works with the following local structure for directories.
+- *base_directory*, it could be anything in the local machine,
+- *base_directory/notebooks*, it contains the notebook file,
+- *base_directory/data*, where input CSV sampling locations file and precipitation and piezometric measurements files will be downloaded and decompressed,
+- *base_directory/results*, where look for CSV output files.
 
-La estructura de directorios pensada para el correcto funcionamiento del notebook es
+## Association criteria between input sampling locations and precipitations/piezometric files
+Only sources inside a 5 km buffer are taken into account.
+### Precipitation
+Two criteria:
+1. Precipitation of the closest point to the sampling location.
+2. Interpolated precipitation by inverse distance weighting average method for sources closer or equal to 5 km.
 
-1. *directorio_base*, que puede ser cualquiera,
-2. *directorio_base/notebooks*, donde ubicaremos el notebook,
-3. *directorio_base/datos*, donde el notebook buscará los ficheros de entrada y descargará, descomprimirá y desempaquetará los ficheros de precipitación y piezometría,
-4. *directorio_base/resultados*, donde almacenará los ficheros CSV con el resultado de la asociación entre loclizaciones de muestreo y puntos de medida de la precipitación y piezometría.
+### Piezometry
+Only one criterium
+1. The most extended temporal piezometric series (for sources with measurements closest or equal to 5 km) is associated with each sampling location.
 
-## Criterios de asociación entre localizaciones geográficas
+## Output files
 
-Sólo se considerarán fuentes cercanas a las ubicaciones de muestreo dentro de un radio de 5 km.
+Located in *output_dir* directory, defined as variable in the notebook code.
 
-### Para la precipitación
+- *historico_precipitaciones_ponderado_distancia.csv*, with historical interpolated precipitation measurements, weighted by inverse of distance.
 
-Dos criterios:
+- *historico_precipitaciones_punto_mas_cercano.csv*, with historical interpolated precipitation equals to the closest point with measurements.
 
-1. el de medidas asociadas al **punto más cercano**.
-2. el de la **media ponderada con el inverso de la distancia para las ubicaciones próximas** (distancia menor de 5 km).
+- *historico_piezometrias.csv*, with measurements of longest temporal serie of piezometry taken inside a buffer of, by default, 5.000 m.
 
-
-### Para la piezometría
-
-Un único criterio que consiste en
-
-1. Se asocia la medida cuya **serie temporal de medidas sea la más larga dentro** de las localizaciones válidas para cada localización de muestreo.
-
-## Ficheros de salida
-
-Ubicados en el directorio *output_dir* definido en el notebook.
-
-- *historico_precipitaciones_ponderado_distancia.csv*, con medidas de precipitación interpolada según inverso de las distancias a los nodos de precipitación dentro de un buffer de, por defecto, 5.000 m de distancia a cada localización de muestreo.
-
-- *historico_precipitaciones_punto_mas_cercano.csv*, con medidas de precipitación para cada localización de muestreo iguales al punto más cercano de medida de precipitación (dentro del buffer de 5.000 m por defecto).
-
-- *historico_piezometrias.csv*, con las medidas de piezometría correspondientes a la serie más larga de todos los piezometros que están a una distancia igual o inferior al radio del buffer de cada punto de muestreo (por defecto 5.000 m).
-
-- Ficheros de tipo JPG de todas las representaciones generadas en el notebook, tanto de distribución espacial como de estadísticas.
+- Several JPG files, of every figures generated and showed in the notebook.
 
 ## Contact
 
