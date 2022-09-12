@@ -1,26 +1,27 @@
-# Precipitación y Piezometría en SARAI
+# Precipitation and Piezometry in SARAI
 
-El notebook toma las **localizaciones de muestreo** dadas por un fichero de entrada y 
+The notebook takes data given by CSV input file (**sampling locations**) and
 
-1. descarga información de precipitación y piezometría en España de dos fuentes de la red,
-2. asocia cada una de las localizaciones con las ubicaciones en las que se han tomado las medidas de las magnitudes anteriores y, finalmente,
-3. genera ficheros CSV en los que se dan las medidas temporales de esas magnitudes para cada localización de muestreo.
+1. downloads precipitation and piezometric historical measurements from two internet sources,
+2. associates previous measurements with sampling locations given by the input file and, finally,
+3. generates output CSV files with measurements or interpolated measurements associated with the closest input sampling locations.
 
-
-## Install
+## Installation
 It's pretty simple: you need [anaconda](https://www.anaconda.com/) installed on your computer and import environment file *environment_sarai.yml*. It generates a new environment that allows the notebook to run without problems.
 
 
-## Fuentes de datos
+## Data sources
 
-1. Fichero CSV con las **localizaciones de muestreo**. Contiene, entre otras, la ubicación geográfica de dichos puntos y un campo con valor único para cada localización (FID), que se empleará para determinar las medidas asociadas a cada una de ellas (como nombre de columnas en los ficheros de salida).
+1. Input CSV file with **sampling locations**. It contains, among others, a geographic location defined by coordinates and a unique field (*FID*). The notebook used it as location identification in output measurements CSV files (as column name).
 
-Este fichero puede ser cualquier CSV que tenga el carácter ';' como separador de campos. Las coordenadas de las ubicaciones de muestreo vendrán dadas por los campos *X* e *Y* con valores geográficos de longitud y latitud en el sistema WGS64 (ETRS:4326), respectivamente.
+This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *X*) and latitude (field *Y*) in **WGS84** (**ETRS_4326**) system.
 
-2. **Medidas de precipitación**, comprimido y empaquetado (*.tar.gz) y ubicado en la siguiente dirección web:[https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). Viene dado por 3 ficheros:
-   - README, con información sobre el contenido del paquete,
-   - Master, con ifnromación sobre la ubicación de los puntos de la malla y su identificador,
-   - fichero de datos, que contiene medidas interpoladas con una resolución espacial de malla 5x5 km, y una resolución temporal diaria desde el 01/01/1951 hasta el 31/12/2020.
+2. **Precipitation measurements**. Coded as an internal notebook variable, it points to a packed and compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
+   - *README*, which informs about the content of files,
+   - *Master*, with precipitation grid coordinates and their IDs,
+   - *historical precipitation file*, which contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31. 
+  
+3. ****
 3. **Medidas de pieometría**, comprimido (ZIP). Es una base de datos MS Access accesible desde [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip), y que consta de dos tablas:
    - Una que contiene informacion sobre los piezómetros y su ubicación (junto con su identificador)
    - Otra, con medidas piezométricas.
