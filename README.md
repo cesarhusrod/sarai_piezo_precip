@@ -45,23 +45,25 @@ It's named as **config.ini** and used by notebook as input parameters file. It's
 
 ## Data sources
 
-1. Input CSV file with **sampling locations**. It contains, among others, a geographic location defined by coordinates and a unique field (*FID*). The notebook used it as location identification in output measurements CSV files (as column name).
+1. Input CSV file with **sampling locations**. It's given by *locations_file* parameter in *config.ini* file. It contains, among others, a geographic location defined by coordinates and a unique field (*location_id_field* parameter in *config.ini* file). The notebook used it as location identification in output measurements CSV files (as column name).
 
-This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *X*) and latitude (field *Y*) in **WGS84** (**ETRS_4326**) system.
+This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *location_lon*) and latitude (field *location_lat*) in *geographic* (*EPSG:4326*) reference system of coordinates.
 
-2. **Precipitation measurements**. Coded as an internal notebook variable, it points to a packed and compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
+2. **Precipitation measurements**. Coded as an input parameter *precipitations_url* in the *config.ini* configuration file. It points by default to a packed, compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
    - *README*, which informs about the content of files,
    - *Master*, with precipitation grid coordinates and their IDs,
    - *historical precipitation file*, which contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31. 
   
-3. **Piezometrical measurements**. Coded again as internal notebook variable, it points as default as a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
-   - The first one contains information about piezometers and geographical locations (*WGS84*)
+3. **Piezometrical measurements**. Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
+   - The first one contains information about piezometers and geographical locations (with *geometry* as coordinate reference system)
    - The second one includes historical piezometrical measurements.
 
 ## Association criteria between input sampling locations and precipitations/piezometric files
+
 Only sources inside a 5 km buffer are taken into account.
+
 ### Precipitation
-Two criteria:
+Two criteria applied:
 1. Precipitation of the closest point to the sampling location.
 2. Interpolated precipitation by inverse distance weighting average method for sources closer or equal to 5 km.
 
@@ -125,8 +127,12 @@ and the histogram of distances between associated locations
 
 ![distance between sampling and precipitation node locations histogram ](/sample_images/histograma_distancias_nodos_precipitacion-puntos_muestreo.jpg)
 
+Of course, two CSV files are generated with 
 
-### 3. Downloading and processing piezomtryc data
+- precipitation associated to the closest node-sampling location, and
+- precipitation computed used the inverse of distance node-sampling location for grid nodes inside a buffer of predefined distance.
+
+### 3. Downloading and processing piezometry data
 
 Similar procedure is followed in case of piezometrical measurements.
 
@@ -150,4 +156,6 @@ Here is the the histogram that shows number of sampling locations associated to 
 
 And finally, following figure shows sampling locations associated to the most popular piezometer (IDPIEZ=2015).
 
-![Samplnig locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
+![Sampling locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
+
+Again, a CSV file with associated piezometry measurements to sampling locations is generated as output.
