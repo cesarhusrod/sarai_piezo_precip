@@ -9,6 +9,39 @@ The notebook takes data given by CSV input file (**sampling locations**) and
 ## Installation
 It's pretty simple: you need [anaconda](https://www.anaconda.com/) installed on your computer and import environment file *environment_sarai.yml*. It generates a new environment that allows the notebook to run without problems.
 
+## Configuration file
+
+It's named as **config.ini** and used by notebook as input parameters file. It's self-explaining (there are comments that describeeach parameter).
+
+| Section      | Parameter name  | Description     |  Default value |
+| :---        |    :----:   |          ---: |          ---: |
+| directories | data_dir | Directory for downloading, unpacking and uncompressing input files given by URLs. | ./data |
+| directories | output_dir | Output directory for CSV precipitation and piezometry associations. Plots are stored here too. | ./results |
+|||||
+|urls | piezometry_url | URL of piezometry data package. | https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip  |
+|urls | precipitations_url | URL of precipitation data package. | https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz |
+|||||
+| paths | locations_file | Input CSV file with locations of interest. | Point_Sampling_Murcia_desc.txt |
+| paths | out_closest_prepic | Precipitation to the closest sample-node precipitation CSV output file. | historico_precipitaciones_punto_mas_cercano.csv |
+| paths | out_interp_precip | Precipitation associated toeach sample location computed with the inverse distance to precipitation nodes. It's a CSV text output file.| historico_precipitaciones_ponderado_distancia.csv |
+| paths | out_longer_piezo | Piezometry associated to sampling location. Again, a CSV text file. | historico_piezometrias.csv |
+|||||
+| buffer | radius | Distance (in m) to each sampling location where piezometry and precipitation locations are considered. | 5000 |
+|||||
+| fields | location_id_field | Identification field name (unique) for each sampling location. | FID |
+| fields | location_lat | Field name with geographic longitude in sampling locations input file (locations_file). | Y |
+| fields | location_lon | Field name with geographic latitude in sampling locations input file (locations_file). | X |
+| fields | precip_date | Field name inside precipitation file (precipitations_url) that contains dates when precipitation was computed. | fecha |
+| fields | precip_lon | Field name that contains geograhic longitude for each node in preipitations grid. | longitude  |
+| fields | precip_lat | Field name that contains geograhic latitude for each node in preipitations grid. | latitude |
+| fields | piezo_id_field | Identification field name (unique) for each piezometer (piezometry_url). | IDPIEZ |
+| fields | piezo_date | Field name inside piezometrical levels file (inside piezometry_url package) that contains dates when piezometry level was taken. | FechaP |
+| fields | piezo_lat | Field name with geographic longitude in piezometers input file (inside piezmetry_url package). | CY89_HUSO30 |
+| fields | piezo_lon | Field name with geographic latitude in piezometers input file (inside piezmetry_url package). | CX89_HUSO30 |
+| fields | piezo_field | Field name that contains piezometrical measurement. | Cota_NP_msnm |
+|||||
+| crs | geographic | Geographic system of coordinates. | EPSG:4326 |
+| crs | projected | Projected system of coordinates. | EPSG:25830 |
 
 ## Data sources
 
