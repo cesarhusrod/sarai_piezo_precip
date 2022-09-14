@@ -58,13 +58,6 @@ This file must have the character ';' as the field delimiter. Sampling location 
    - The first one contains information about piezometers and geographical locations (*WGS84*)
    - The second one includes historical piezometrical measurements.
 
-## Recommended structure of directories
-The notebook code works with the following local structure for directories.
-- *base_directory*, it could be anything in the local machine,
-- *base_directory/notebooks*, it contains the notebook file,
-- *base_directory/data*, where input CSV sampling locations file and precipitation and piezometric measurements files will be downloaded and decompressed,
-- *base_directory/results*, where look for CSV output files.
-
 ## Association criteria between input sampling locations and precipitations/piezometric files
 Only sources inside a 5 km buffer are taken into account.
 ### Precipitation
@@ -78,15 +71,15 @@ Only one criterium
 
 ## Output files
 
-Located in *output_dir* directory, defined as variable in the notebook code.
+Located in **output_dir** (*./results*) directory given by *config.ini* configuration file.
 
-- *historico_precipitaciones_ponderado_distancia.csv*, with historical interpolated precipitation measurements, weighted by inverse of distance.
+- **out_interp_precip** (*historico_precipitaciones_ponderado_distancia.csv*), with historical interpolated precipitation measurements, weighted by inverse of distance.
 
-- *historico_precipitaciones_punto_mas_cercano.csv*, with historical interpolated precipitation equals to the closest point with measurements.
+- **out_closest_prepic** (*historico_precipitaciones_punto_mas_cercano.csv*), with historical interpolated precipitation equals to the closest point with measurements.
 
-- *historico_piezometrias.csv*, with measurements of longest temporal serie of piezometry taken inside a buffer of, by default, 5.000 m.
+- **out_longer_piezo** (*historico_piezometrias.csv*), with measurements of longest temporal serie of piezometry taken inside a buffer of, by default, **radius** (*5.000 m*).
 
-- Several JPG files, of every figures generated and showed in the notebook.
+- JPG files: all figures generated and showed in the notebook.
 
 ## Contact
 
@@ -99,6 +92,8 @@ This project is licensed under the terms of the GNU General Public License v3.0
 ## Example
 
 We will show you some screen captures for illustrating the notebook algorithm.
+
+### 1. Loading locations of interest
 
 First of all, the input data file. It's a CSV text format file. Field separator is given by character ','. Thousand marker is a point '.'.
 
@@ -114,6 +109,8 @@ After that, plot sampling locations.
 
 ![Sampling locations](/sample_images/localizaciones_de_muestreo.jpg)
 
+### 2. Downloading and processing precipitation data
+
 Next step is to load precipitation data, filtering to interesting area and plotting both on a map.
 
 ![Sampling locations and precipitations grid](/sample_images/nodos_precipitacion_En_area_de_muestreo.jpg)
@@ -127,6 +124,9 @@ And the next one, shows precipitation nodes associated to sampling locations.
 and the histogram of distances between associated locations
 
 ![distance between sampling and precipitation node locations histogram ](/sample_images/histograma_distancias_nodos_precipitacion-puntos_muestreo.jpg)
+
+
+### 3. Downloading and processing piezomtryc data
 
 Similar procedure is followed in case of piezometrical measurements.
 
