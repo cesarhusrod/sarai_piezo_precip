@@ -23,8 +23,8 @@ dependencies:
   - brotlipy=0.7.0=py38h2bbff1b_1003
   - bzip2=1.0.8=he774522_0
   - c-ares=1.18.1=h2bbff1b_0
-  - ca-certificates=2022.6.15=h5b45459_0
-  - certifi=2022.6.15=py38haa244fe_0
+  - ca-certificates=2022.6.15.1=h5b45459_0
+  - certifi=2022.6.15.1=pyhd8ed1ab_0
   - cffi=1.15.0=py38h2bbff1b_1
   - cfitsio=3.470=h2bbff1b_7
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
@@ -32,6 +32,7 @@ dependencies:
   - click-plugins=1.1.1=pyhd3eb1b0_0
   - cligj=0.7.2=py38haa95532_0
   - colorama=0.4.5=py38haa95532_0
+  - configparser=5.3.0=pyhd8ed1ab_0
   - contextily=1.2.0=pyhd8ed1ab_0
   - cryptography=37.0.1=py38h21b164f_0
   - curl=7.84.0=h2bbff1b_0
