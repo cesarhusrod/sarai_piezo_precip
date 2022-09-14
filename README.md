@@ -65,4 +65,56 @@ This project is licensed under the terms of the GNU General Public License v3.0
 
 ## Example
 
+We will show you some screen captures for illustrating the notebook algorithm.
 
+First of all, the input data file. It's a CSV text format file. Field separator is given by character ','. Thousand marker is a point '.'.
+
+```python
+locations_file = config.get('paths', 'locations_file') # reading input CSV file path from 'config.ini' file
+df_loc = pd.read_csv(locations_file, sep=';', decimal=',') 
+id_loc = config.get('fields', 'location_id_field') # reading field ID from 'config.ini' file
+df_loc = df_loc.set_index(id_loc, drop=False)
+print(df_loc.info()) # showing input dataframe info
+```
+
+After that, plot sampling locations.
+
+![Sampling locations](/sample_images/localizaciones_de_muestreo.jpg)
+
+Next step is to load precipitation data, filtering to interesting area and plotting both on a map.
+
+![Sampling locations and precipitations grid](/sample_images/nodos_precipitacion_En_area_de_muestreo.jpg)
+
+As it was mentioned before, there are two association algorithms. Next figure shows the closest sources implementation for a precipitation node of the grid (given by ID = 1868).
+
+And the next one, shows precipitation nodes associated to sampling locations.
+
+![Sampling locations and selected node of the precipitations grid](/sample_images/nodos_de_precipitacion_seleccionados.jpg)
+
+and the histogram of distances between associated locations
+
+![distance between sampling and precipitation node locations histogram ](/sample_images/histograma_distancias_nodos_precipitacion-puntos_muestreo.jpg)
+
+Similar procedure is followed in case of piezometrical measurements.
+
+![Sampling locations and piezometers grid](/sample_images/piezometros_en_zona_de_muestreo.jpg)
+
+In this case, association is given between piezometry and samplig locations whose 
+- temporal length series is the longest one and
+- distance is lower than a number of meters given by *radius* parameter in input config.ini file.
+
+Following image shows piezometers associated to sampling locations.
+
+![Sampling locations and selected node of the piezometer locations](/sample_images/piezometros_seleccionados.jpg)
+
+and the histogram of distances between these associations.
+
+![distance between sampling and piezometer locations histogram ](/sample_images/histograma_distancias_a_piezometros.jpg)
+
+Here is the the histogram that shows number of sampling locations associated to each piezometer.
+
+![association between sampling and piezometer locations histogram ](/sample_images/localizaciones_asociadas_a_piezometros.jpg)
+
+And finally, following figure shows sampling locations associated to the most popular piezometer (IDPIEZ=2015).
+
+![Samplnig locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
