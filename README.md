@@ -86,6 +86,12 @@ Located in **output_dir** (*./results*) directory given by *config.ini* configur
 
 - JPG files: all figures generated and showed in the notebook.
 
+CSV output files have following structure: 
+
+*date,ID1, ID2, ID3,...,IDN*
+
+where IDs are the unqie values that identify precipitation grid nodes or piezometers.
+
 ## Contact
 
 My name is César Husillos Rodríguez. You can contact me just via GitHub or through our e-mails: c.husillos@igme.es.
