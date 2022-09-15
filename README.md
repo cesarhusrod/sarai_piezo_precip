@@ -57,7 +57,7 @@ This file must have the character ';' as the field delimiter. Sampling location 
    - *Master*, with precipitation grid coordinates and their IDs,
    - *historical precipitation file*, which contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31. 
   
-3. **Piezometrical measurements**. Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
+3. **Piezometric measurements**. Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
    - The first one contains information about piezometers and geographical locations (with *geometry* as coordinate reference system)
    - The second one includes historical piezometrical measurements.
 
