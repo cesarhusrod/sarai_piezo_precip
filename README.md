@@ -54,40 +54,37 @@ Congratulations! Now you can execute or edit what you want in this notebook.
 
 ## Configuration file
 
-It's named **config.ini** and is used by the notebook as an input parameters file. It's self-explaining (some comments describe each parameter).
+It is named *config.ini* and is used by the notebook as an input parameters file. It is self-explaining (some comments describe each parameter).
 
-*config.ini* is a file text. It is structured in two types of lines:
-   1. Section line.
-   
-      It represent a group of parameters. The syntax is
-
-      *[Section name]*
-
-      (inside [])
-
-   2. Parameter line.
-      
-      It is used to define
-      - a paramater name, 
-      - its value, and 
-      - optionally, a brief description (after an ' ' and a '#' characters). 
+*config.ini* is a file text. The structure has two types of lines:
+- Section line.
   
-      The syntax for each line is a follows:
+   It represents a group of parameters. The syntax is
+      
+      [Section name]
+      
+- Parameter line.
 
-      *parameter_name=parameter_value # optional comment*
+   It is used to define:
+   
+   - a parameter name,
+   - its value, and
+   - optionally, a brief description (after an ' ' and a '#' characters).
+  
+   The syntax for each line is as follows:
 
-      As said previously, if you don't want use comments at his line, the other valid syntax for each line would be
+   *parameter_name=parameter_value # optional comment*
 
-      *parameter_name=parameter_value*   
+   As said previously, if you don't want to use comments on his line, the other valid syntax for each line would be
 
+   *parameter_name=parameter_value*
 
-Default parameters values allows you to run and test all cells of repository notebook. If you want to set new values in some parameters, take into account following advices:
+Default parameter values allow you to run and test all cells of the repository notebook. If you want to set new values in some parameters, take into account the following advice:
 
-1. Only one value is valid for each parameter.
-2. All values are considered as text by notebook.
-3. The notebook cells that process URL parameters were developped exclusively for given default values. If you change them, you'll have to adapt them according to compression and/or package methods used by new sources pointed by parameters group by *urls* section.
-
-This table shows you information about parameters you can find in *config.ini* file:
+   - Only one value is valid for each parameter.
+   - All values are considered as text by notebook.
+   - The notebook cells that process URL parameters were developed exclusively for given default values. If you change them, you'll have to adapt them according to compression and package methods used by new sources pointed by the parameters group by URLs section.
+This table shows you information about parameters you can find in config.ini file.:
 
 
 | Section     |   Parameter name   |                                                                                                                                                 Description |                                                                                                                                                Default value |
@@ -184,14 +181,11 @@ where IDs are the unqie values that identify precipitation grid nodes or piezome
 
 ## Acknowledgements
 
-This work is part of the SARAI project of the Spanish Science and Innovation Ministry with reference PID2020-116540RB-C22 funded by MCIN/ AEI /10.13039/501100011033. This work has been performed within the SARAI subproject leaded by the Geological and Mining Institute of Spain (CN IGME), which is a research body integrated into the Higher Council for Scientific Research (CSIC). 
-
-Project link: [https://webwp.igme.es/sarai/index.php/en/home/](https://webwp.igme.es/sarai/index.php/en/home/)
-
-
-We would like to thank to
+This work is part of the SARAI project of the Spanish Science and Innovation Ministry with reference PID2020-116540RB-C22 funded by MCIN/ AEI /10.13039/501100011033. This work has been performed within the SARAI subproject led by the Geological and Mining Institute of Spain (CN IGME), a research body integrated into the Higher Council for Scientific Research (CSIC).
+Project link: https://webwp.igme.es/sarai/index.php/en/home/
+We would like to thank 
 - AEMET (https://www.aemet.es/) for the precipitation data used in this notebook.
-- MINECO (https://www.miteco.gob.es/) because of the piezometrical information used at this work.
+- MINECO (https://www.miteco.gob.es/) because of the piezometric information used in this work.
 
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
 
@@ -206,7 +200,7 @@ Our names are:
 - Pablo Ezquerro Martín (p.ezquerro@igme.es)
 - Ángel Prieto Martín (a.prieto@igme.es). 
   
-You can contact us just via e-mails or look for us in GitHub.
+You can contact us just via e-mail or look for us on GitHub.
 
 ## License
 
