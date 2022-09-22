@@ -85,7 +85,7 @@ Default parameters values allows you to run and test all cells of repository not
 
 1. Only one value is valid for each parameter.
 2. All values are considered as text by notebook.
-3. The notebook cells that process URL parameters were developped exclusively for given default values. If you change them, you'll have to adapt then according to compression and/or package methods used by new sources pointed by parameters group by *urls* section.
+3. The notebook cells that process URL parameters were developped exclusively for given default values. If you change them, you'll have to adapt them according to compression and/or package methods used by new sources pointed by parameters group by *urls* section.
 
 This table shows you information about parameters you can find in *config.ini* file:
 
@@ -123,18 +123,33 @@ This table shows you information about parameters you can find in *config.ini* f
 
 ## Data sources
 
-1. Input CSV file with **sampling locations**. It's given by *locations_file* parameter in *config.ini* file. It contains, among others, a geographic location defined by coordinates and a unique field (*location_id_field* parameter in *config.ini* file). The notebook used it as location identification in output measurements CSV files (as column name).
+1. Input CSV file with **sampling locations**.
+
+The example file with the location sampling is taken from a study case of the SARAI project (https://webwp.igme.es/sarai), just as a sample case: one file with several columns, and among them there are two with latitude and longitude coordinates, and another column with one unique ID.
+
+It's given by *locations_file* parameter in *config.ini* file. It contains, among others, a geographic location defined by coordinates and a unique field (*location_id_field* parameter in *config.ini* file). The notebook used it as location identification in output measurements CSV files (as column name).
 
 This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *location_lon*) and latitude (field *location_lat*) in *geographic* (*EPSG:4326*) reference system of coordinates.
 
-2. **Precipitation measurements**. Coded as an input parameter *precipitations_url* in the *config.ini* configuration file. It points by default to a packed, compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
-   - *README*, which informs about the content of files,
-   - *Master*, with precipitation grid coordinates and their IDs,
-   - *historical precipitation file*, which contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31. 
-  
-3. **Piezometric measurements**. Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
-   - The first one contains information about piezometers and geographical locations (with *geometry* as coordinate reference system)
-   - The second one includes historical piezometrical measurements.
+2. **Precipitation measurements**.
+
+Rainfall compiled data for all the Iberian Peninsula and Baleares between 1950 and 2020 are taken the Agencia Estatal de Meteorología (AEMET).
+
+Coded as an input parameter *precipitations_url* in the *config.ini* configuration file. It points by default to a packed, compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
+
+- *README.txt*, which informs about the content of files,
+
+- *maestro_red_hr_SPAIN.txt*, with precipitation grid coordinates and their IDs,
+
+- *pcp_red_SPAIN_1951-2020.txt*, historical precipitation file that contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31.
+
+3. **Piezometric measurements**. Piezometric compiled data base for all the Iberian Peninsula and Baleares until 2020 are taken from the Ministerio de Transición Ecológica y Reto Demográfico
+
+Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
+
+- The first one contains information about piezometers and geographical locations (with *geometry* as coordinate reference system)
+
+- The second one includes historical piezometrical measurements.
 
 ## Association criteria between input sampling locations and precipitations/piezometric files
 
@@ -173,6 +188,14 @@ This work is part of the SARAI project of the Spanish Science and Innovation Min
 
 Project link: [https://webwp.igme.es/sarai/index.php/en/home/](https://webwp.igme.es/sarai/index.php/en/home/)
 
+
+We would like to thank to
+- AEMET (https://www.aemet.es/) for the precipitation data used in this notebook.
+- MINECO (https://www.miteco.gob.es/) because of the piezometrical information used at this work.
+
+![AEMET Logo](/sample_images/logo_aemet.jpg)
+
+![MITECO Logo](/sample_images/miteco_logo.png)
 ## Contact
 
 My name is César Husillos Rodríguez. You can contact me just via GitHub or through our e-mails: c.husillos@igme.es.
