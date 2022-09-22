@@ -196,9 +196,17 @@ We would like to thank to
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
 
 ![MITECO Logo](/sample_images/miteco_logo.png)
+
 ## Contact
 
-My name is César Husillos Rodríguez. You can contact me just via GitHub or through our e-mails: c.husillos@igme.es.
+Our names are:
+- César Husillos Rodríguez (c.husillos@igme.es), 
+- Carolina Guardiola Albert (c.guardiola@igme.es), 
+- Héctor Aguilera Alonso (h.aguilera@igme.es),
+- Pablo Ezquerro Martín (p.ezquerro@igme.es)
+- Ángel Prieto Martín (a.prieto@igme.es). 
+  
+You can contact us just via e-mails or look for us in GitHub.
 
 ## License
 
