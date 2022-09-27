@@ -9,6 +9,16 @@ El objetivo de este Notebook es completar la información de lugares de muestreo
 2. Asocia las ubicaciones de muestreo con aquellas en las que se han tomado datos de precipitación y piezometría y, finalmente,
 3. Genera ficheros de texto en formato CSV para ambas magnitudes.
 
+## Descarga del repositorio
+
+Debe tener el [cliente GIT](https://git-scm.com/downloads) instalado en su ordenador.
+
+Lo siguiente es abrir la consola de GIT (en el caso de trabajar en Windows) o la terminal (si lo hace en LINUX o MAC) y escribir la siguiente línea de código:
+
+```git clone https://git.igme.es/chusillos/sarai_piezo_precip.git```
+
+eso creará una carpeta de nombre *sarai_piezo_precip* en su disco duro con todo el código necesario y los ficheros de ejemplo. Así de simple.
+
 ## Instalación
 
 El proceso es muy sencillo:
