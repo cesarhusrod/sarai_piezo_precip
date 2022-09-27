@@ -1,289 +1,359 @@
 ![Funding Ministery](/sample_images/ministerio_ciencia_logo.jpg)
 
 
-# Precipitation and Piezometry in SARAI
+# Precipitación y piezometría en SARAI
 
-The notebook takes data given by CSV input file (**sampling locations**) and
+El objetivo de este Notebook es completar la información de lugares de muestreo con datos de precipitación y piezometría. Para ello:
 
-1. downloads precipitation and piezometric historical measurements from two internet sources,
-2. associates previous measurements with sampling locations given by the input file and, finally,
-3. generates output CSV files with measurements or interpolated measurements associated with the closest input sampling locations.
+1. Descarga de la información de medidas históricas de precipitación y piezometría de dos URLs en la web,
+2. Asocia las ubicaciones de muestreo con aquellas en las que se han tomado datos de precipitación y piezometría y, finalmente,
+3. Genera ficheros de texto en formato CSV para ambas magnitudes.
 
-## Installation
-It's pretty simple:
+## Instalación
 
-1. Install [anaconda](https://www.anaconda.com/) on your computer and 
-2. import environment file *environment_sarai.yml*. It generates a new environment that allows the notebook to run without problems.
+El proceso es muy sencillo:
+
+1. Instale [anaconda](https://www.anaconda.com/) en su ordenador.
+2. Instale el entorno de ejecución definido en el fichero *environment_sarai.yml* usando la interfaz de administración de *Anaconda.Navigator*.
+
+Tras realizar estar operaciones, podrá 
+- cargar el nuevo entorno, 
+- lanzar la aplicación de Jupyter Notebook en su navegador, 
+- cargar el fichero de código (*precipitacion_y_piezometria.ipynb*) y 
+- ejecutarlo sin problemas.
+
+### Proceso de importación del entorno
+
+Siga los siguientes pasos para importar el entorno:
+
+1. Ejecute en su ordenador el programa **Anaconda.Navigator**.
+
+2. Seleccione la pestaña de *Environments* y haga clic sobre el botón *Import*.
+
+![Interfaz de administración de entornos de Anaconda.Navigator](/sample_images/environment/administracion_entornos_anaconda.jpg)
+
+3. Seleccione la opción *Local drive* y busque en su disco el directorio donde ha descargado el repositorio. Ahí encontrará el fichero *environment_sarai.yml*. Lo siguiente es poner un nombre al nuevo entorno que creará y presionar el botón *Import*.
    
-After executing the **Anaconda.Navigator** program, the following screenshots show you how to do it and launch the repository notebook step by step.
+![Anaconda: cómo importar un entorno](/sample_images/environment/importar_entorno_sarai.jpg)
 
-1. Select *Environments* tab and click on *Import* button.
-
-![Anaconda environments backend management](/sample_images/environment/administracion_entornos_anaconda.jpg)
-
-2. Select *Local drive* option and search for repository environment file (*environment_sarai.yml). Set a name for your imported environment and press *Import* button.
+4. Haga clic sobre el nuevo entorno para activarlo.
    
-![Anaconda: how to import environment](/sample_images/environment/importar_entorno_sarai.jpg)
+![Nuevo entorno llamado sarai entre los disponibles en Anaconda](/sample_images/environment/entorno_sarai_instalado.jpg)
 
-3. Click on your enviroment name for activate it.
+Ahora, el entorno llamado en este ejemplo *sarai* está activo y listo para su uso.
+
+![Entorno sarai activo en Anaconda](/sample_images/environment/entorno_sarai_activado.jpg)
+
+5. Cambie a la pestaña *Home*. Ahora podrá ver todas las aplicaciones disponibles para el entorno seleccionado. Por favor, asegúrese de que su nuevo entorno está seleccionado (rectángulo verde que se muestra en la siguiente captura de pantalla). Si la opción *Jupyter notebook* está instalada, pulse bobre el botón *Launch*. Si no es el caso, primero debe pulsar sobre el botón *Install* y, tras finalizar la instalación, sobre el botón *Launch*.
+
+![Cómo se lanza la aplicación de Jupyter Notebook en Anaconda](/sample_images/environment/lanzar_notebook_en_entorno_sarai.jpg)
+
+6. Tras lanzar la aplicación de *Jupyter Notebook*, se abrirá una pestaña en su navegador predeterminado. 
    
-![Anaconda has successfully installed new environment called sarai](/sample_images/environment/entorno_sarai_instalado.jpg)
+![Interfaz web de Jupyter notebook funcionando](/sample_images/environment/notebook_en_entorno_sarai_operativo.jpg)
 
-Now, sarai environmet is activated and ready for use.
-
-![Anaconda activated sarai environment](/sample_images/environment/entorno_sarai_activado.jpg)
-
-4. Change to *Home* tab. You can see all options available for selected environment. Please, check *sarai* environment is selected (green rectangle in figure). If *Jupyter notebbok* grid entry must be installed, please, clik button to do it. It it's previously installed, click *Launch* button.
-
-![Anaconda: how to lauch notebook interface](/sample_images/environment/lanzar_notebook_en_entorno_sarai.jpg)
-
-5. Anaconda notebook interface is loaded as a new tab in your favourite web browser.
+7. Elija la ruta donde haya descargado el repositorio de SARAI haciendo clic sobre la secuencia de subdirectorios adecuada. Después, haga clic sobre el fichero del Notebook de SARAI (*precipitacion_y_piezometria.ipynb*).
    
-![Anaconda running notebook interface](/sample_images/environment/notebook_en_entorno_sarai_operativo.jpg)
+![Selección de Notebook en la interfaz web de Jupyter Notebook](/sample_images/environment/seleccion_notebook_en_entorno_sarai.jpg)
 
-6. Follow link options to access your repository folder. Then click on sarai notebook (*precipitacion_y_piezometria.ipynb*).
+8. Finalmente, su Notebook está cargado en el navegador. 
    
-![Anaconda: notebook selection](/sample_images/environment/seleccion_notebook_en_entorno_sarai.jpg)
+![Notebook de SARAI preparado para su edición y ejecución en su navegador](/sample_images/environment/cargado_notebook_en_entorno_sarai.jpg)
 
-7. Previous operation loads the selected notebook. 
-   
-![sarai Anaconda notebook ready for use](/sample_images/environment/cargado_notebook_en_entorno_sarai.jpg)
+¡Enhorabuena! Ya puede ejecutar el código de las celdas de notebook (o cambiar lo que necesite).
 
-Congratulations! Now you can execute or edit what you want in this notebook.
+## Fichero de configuración
 
+Es el fichero de texto *config.ini*.  Está en el directorio base del repositorio. Se usa para personalizar todos los parámetros del notebook. Es autoexplicativo en el sentido en que en el propio fichero puede obtener una breve descripción de lo que es cada parámetro.
 
-## Configuration file
-
-It is named *config.ini* and is used by the notebook as an input parameters file. It is self-explaining (some comments describe each parameter).
-
-*config.ini* is a file text. The structure has two types of lines:
-- Section line.
+Las filas del fichero *config.ini* son de dos tipos:
+- Línea de sección.
   
-   It represents a group of parameters. The syntax is
+   Una sección presenta una forma de agrupar los parámetros por funcionalidad. No tiene más función que esa aunque es muy importante ya que organiza la información, haciendo fácil su localización cuando el número de parámetros es elevado. Su sintaxis es
       
-      [Section name]
+    ```[Nombre de sección]```
       
-- Parameter line.
+- Línea de parámetro.
 
-   It is used to define:
+   En ella se definen:
    
-   - a parameter name,
-   - its value, and
-   - optionally, a brief description (after an ' ' and a '#' characters).
+   - el nombre del parámetro,
+   - el valor del parámetro, y
+   - de forma opcional, puede incluir una breve descripción del parámetro. Se escribe después de un espacio en blanco (' ') y de una almohadilla ('#').
   
-   The syntax for each line is as follows:
+   La sintaxis completa tiene la forma:
 
-   *parameter_name=parameter_value # optional comment*
+    ```nombre_parámetro=valor_de_parámetro # descripción```
 
-   As said previously, if you don't want to use comments on his line, the other valid syntax for each line would be
+   La sintaxis mínima
 
-   *parameter_name=parameter_value*
+    ```nombre_parámetro=valor_de_parámetro```
 
-Default parameter values allow you to run and test all cells of the repository notebook. If you want to set new values in some parameters, take into account the following advice:
+   Si no se desea asignar un valor a un parámetro, simplemente se deja el espacio en blanco.
 
-   - Only one value is valid for each parameter.
-   - All values are considered as text by notebook.
-   - The notebook cells that process URL parameters were developed exclusively for given default values. If you change them, you'll have to adapt them according to compression and package methods used by new sources pointed by the parameters group by URLs section.
-This table shows you information about parameters you can find in config.ini file.:
+Los valores por defecto de los parámetros permiten ejecutar sin errores todas las celdas del Notebook. En caso de modificar esos valores, tenga en cuenta que con la actual implementación:
+
+   - Sólo es válido un valor por cada parámetro.
+   - Todos los valores que se establezcan son considerados como cadenas de caracteres por el Notebook.
+   - Las celdas que procesan la descarga de ficheros desde URLs en la web están codificadas específicamente para los valores asignados por defecto. Si cambia esas URLs, tendrá que adaptar el código que procesa los ficheros o paquetes que desee descargar.
+  
+La siguiente tabla muestra los parámetros actualmente personalizables en el fichero *config.ini*:
 
 
-| Section     |   Parameter name   |                                                                                                                                                 Description |                                                                                                                                                Default value |
-| :---------- | :----------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------: | -----------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| directories |      data_dir      |                                                     It's the directory where input files given by section *URLs* are downloaded, unpacked and uncompressed. |                                                                                                                                                       ./data |
-| directories |     output_dir     |               It's the output directory where CSV precipitation and piezometric associations are stored. Plots generated by the notebook are kept here too. |                                                                                                                                                    ./results |
-|             |                    |                                                                                                                                                             |                                                                                                                                                              |
-| urls        |   piezometry_url   |                                                                                                                            The piezometry data package URL. |                                                           https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip |
-| urls        | precipitations_url |                                                                                                                         The precipitation data package URL. | https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz |
-|             |                    |                                                                                                                                                             |                                                                                                                                                              |
-| paths       |   locations_file   |                                                                                   It's the CSV input file with information about the locations of interest. |                                                                                                                               Point_Sampling_Murcia_desc.txt |
-| paths       | out_closest_prepic |                                                        It's the CSV precipitation output file obtained using the closest sample-node association algorithm. |                                                                                                              historico_precipitaciones_punto_mas_cercano.csv |
-| paths       | out_interp_precip  | It refers to the precipitation associated with each sample location computed with the inverse distance to precipitation nodes. It's a CSV text output file. |                                                                                                            historico_precipitaciones_ponderado_distancia.csv |
-| paths       |  out_longer_piezo  |                                                                              Piezometry associated with the sampling location. Again, it's a CSV text file. |                                                                                                                                   historico_piezometrias.csv |
-|             |                    |                                                                                                                                                             |                                                                                                                                                              |
-| buffer      |       radius       |                                                         Distance (in m) to each sampling location where piezometry and precipitation points are considered. |                                                                                                                                                         5000 |
-|             |                    |                                                                                                                                                             |                                                                                                                                                              |
-| fields      |    location_id     |                                                                           It's the numerical identification field name (unique) for each sampling location. |                                                                                                                                                          FID |
-| fields      |   location_label   |                                                                             Field used to identify sampling locations in output header precipitation files. |                                                                                                                                                        PS_ID |
-| fields      |    location_lat    |                                                                     Field name with geographic longitude in sampling locations input file (locations_file). |                                                                                                                                                            Y |
-| fields      |    location_lon    |                                                                      Field name with geographic latitude in sampling locations input file (locations_file). |                                                                                                                                                            X |
-| fields      |    precip_date     |                                                     Field name inside precipitation file (precipitations_url). It contains dates of computed precipitation. |                                                                                                                                                        fecha |
-| fields      |     precip_lon     |                                                                   The field name contains the geographic longitude for each node in the precipitation grid. |                                                                                                                                                    longitude |
-| fields      |     precip_lat     |                                                                    The field name contains the geographic latitude for each node in the precipitation grid. |                                                                                                                                                     latitude |
-| fields      |      piezo_id      |                                                                                    Identification field name (unique) for each piezometer (piezometry_url). |                                                                                                                                                       IDPIEZ |
-| fields      |     piezo_date     |                                    Field name inside piezometric levels file (inside piezometry_url package). It keeps dates of piezometric level measured. |                                                                                                                                                       FechaP |
-| fields      |     piezo_lat      |                                                         Field name with geographic longitude in the piezometers input file (inside piezometry_url package). |                                                                                                                                                  CY89_HUSO30 |
-| fields      |     piezo_lon      |                                                          Field name with geographic latitude in the piezometers input file (inside piezometry_url package). |                                                                                                                                                  CX89_HUSO30 |
-| fields      |   piezo_measure    |                                                                                                  It's the field name that contains piezometric measurement. |                                                                                                                                                 Cota_NP_msnm |
-|             |                    |                                                                                                                                                             |                                                                                                                                                              |
-| crs         |     geographic     |                                                                                                                           Geographic system of coordinates. |                                                                                                                                                    EPSG:4326 |
-| crs         |     projected      |                                                                                                                            Projected system of coordinates. |                                                                                                                                                   EPSG:25830 |
+| Sección     | Nombre de parámetro |                                                                                                                                                                                                                                                                                                                                                                                         Descripción |                                                                                                                                                                               Valor por defecto |
+| :---------- | :-----------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| directories |      data_dir       |                                                                                                                                                                                                                                                          Es el directorio donde se descargan, descomprimen y desempaquetan los ficheros de entrada establcidos en la sección *URLs* are downloaded. |                                                                                                                                                                                          ./data |
+| directories |     output_dir      |                                                                                                                                                                                                                      Directorio de salida. Aquí guardarán los ficheros de texto CSV con información de precipitación y piezometría. También almacenará todas las figuras generadas por el Notebook. |                                                                                                                                                                                       ./results |
+|             |                     |                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                 |
+| urls        |   piezometry_url    |                                                                                                                                                                                                                                                                                                                                        Dirección web del paquete que contiene datos de piezometría. |                                                                  [enlace piezometría](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip) (ZIP) |
+| urls        | precipitations_url  |                                                                                                                                                                                                                                                                                                                                  Dirección web del paquete que contiene los datos de precipitación. | [enlace precipitaciones](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz) (TAR.GZ) |
+|             |                     |                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                 |
+| paths       |   locations_file    |                                                                                                                                                                                                                                                                                           Ruta al fichero de texto en formato CSV que contiene información sobre los puntos de muestreo de interés. |                                                                                                                                                                  Point_Sampling_Murcia_desc.txt |
+| paths       | out_closest_prepic  |                                                                                                                                                                        Nombre del fichero de texto en formato CSV. Se almacenará en el directorio de salida establecido por el parámetro *output_dir*. Contendrá los datos de precipitación asociados mediante el algoritmo de puntos más próximos. |                                                                                                                                                 historico_precipitaciones_punto_mas_cercano.csv |
+| paths       |  out_interp_precip  | Nombre del fichero de texto en formato CSV. Se almacenará en el directorio de salida establecido por el parámetro *output_dir*. Los datos de precipitación para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de precipitación dentro de una distancia máxima, que está determinada por el parámetro *radius*. |                                                                                                                                               historico_precipitaciones_ponderado_distancia.csv |
+| paths       |  out_longer_piezo   |                Nombre del fichero de salida en formato CSV que contendrá los datos de piezometría asociados a los puntos de muestreo. Habrá medidas siempre que la distancia entre punto de muestreo y punto de medida piezométrico sea inferior a la distancia dada por el parámetro *radius*. Si hay varios puntos con medidas piezométricas, se asocia el que tenga la serie temporal más larga. |                                                                                                                                                                      historico_piezometrias.csv |
+|             |                     |                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                 |
+| buffer      |       radius        |                                                                                                                                                                                                                                                                                           Distancia (en metros) máxima entre punto de muestreo y punto con medición de precipitación o piezometría. |                                                                                                                                                                                            5000 |
+|             |                     |                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                 |
+| fields      |     location_id     |                                                                                                                                                                                                                                          Nombre del campo en el fichero de localizaciones de muestreo (*locations_file*) cuyos valores identifican de forma unívoca a cada una de esas ubicaciones. |                                                                                                                                                                                             FID |
+| fields      |   location_label    |                                                                                                                                                                                                                         Nombre del campo alfanumérico en el fichero de localizaciones de muestreo (*locations_file*)) que identifica de forma unívoca a cada una de las localizaciones de muestreo. |                                                                                                                                                                                           PS_ID |
+| fields      |  location_lon_geo   |                                                                                                                                                                                Nombre del campo del fichero de localizaciones de muestreo (*locations_file*) que contiene la longitud geográfica de cada una de ellas  (el sistema de referencia está dado por el parámetro *location_geographic*). |                                                                                                                                                                                               X |
+| fields      |  location_lat_geo   |                                                                                                                                                                                 Nombre del campo del fichero de localizaciones de muestreo (*locations_file*) que contiene la latitud geográfica de cada una de ellas  (el sistema de referencia está dado por el parámetro *location_geographic*). |                                                                                                                                                                                               Y |
+| fields      |  location_lon_proj  |                                                                                                                                                                                  Nombre del campo del fichero de localizaciones de muestreo (*locations_file*) que contiene la longitud proyectada de cada una de ellas (el sistema de referencia está dado por el parámetro *location_projected*). |                                                                                                                                                                                      Lon_ETRS89 |
+| fields      |  location_lat_proj  |                                                                                                                                                                                   Nombre del campo del fichero de localizaciones de muestreo (*locations_file*) que contiene la latitud proyectada de cada una de ellas (el sistema de referencia está dado por el parámetro *location_projected*). |                                                                                                                                                                                      Lat_ETRS89 |
+| fields      |     precip_date     |                                                                                                                                                                                                                                    Nombre del campo que contiene las fechas en las que se registraron las medidas de precipitación (dentro del fichero dado por el parámetro *precipitations_url*). |                                                                                                                                                                                           fecha |
+| fields      |   precip_lon_geo    |                                                                                                                                                                                                                 Nombre del campo que contiene la longitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_geographic*). |                                                                                                                                                                                       longitude |
+| fields      |   precip_lat_geo    |                                                                                                                                                                                                                  Nombre del campo que contiene la latitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_geographic*). |                                                                                                                                                                                        latitude |
+| fields      |   precip_lon_proj   |                                                                                                                                                                                                                  Nombre del campo que contiene la longitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
+| fields      |   precip_lat_proj   |                                                                                                                                                                                                                   Nombre del campo que contiene la latitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
+| fields      |      piezo_id       |                                                                                                                                                                                                                                             Nombre del campo que identifica de forma unívoca a cada piezómetro. Dicha información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                          IDPIEZ |
+| fields      |     piezo_date      |                                                                                                                                                                                                                                                              Nombre del campo que establece la fecha de toma de medida piezométrica. Es parte del paquete apuntado por el fichero *piezometry_url*. |                                                                                                                                                                                          FechaP |
+| fields      |    piezo_lon_geo    |                                                                                                                                                       Nombre del campo que almacena la longitud de la ubicación de los piezómetros. El sistema de referencia usado viene dado por el parámetro *piezo_geographic*. La información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                                 |
+| fields      |    piezo_lat_geo    |                                                                                                                                                        Nombre del campo que almacena la latitud de la ubicación de los piezómetros. El sistema de referencia usado viene dado por el parámetro *piezo_geographic*. La información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                                 |
+| fields      |   piezo_lon_proj    |                                                                                                                                                       Nombre del campo que almacena la longitud de la ubicación de los piezómetros. El sistema de referencia usado viene dado por el parámetro *piezo_geographic*. La información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                     CX89_HUSO30 |
+| fields      |   piezo_lat_proj    |                                                                                                                                                        Nombre del campo que almacena la latitud de la ubicación de los piezómetros. El sistema de referencia usado viene dado por el parámetro *piezo_geographic*. La información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                     CY89_HUSO30 |
+| fields      |    piezo_measure    |                                                                                                                                                                                                                                                                                                                                          It's the field name that contains piezometric measurement. |                                                                                                                                                                                    Cota_NP_msnm |
+|             |                     |                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                 |
+| crs         | location_geographic |                                                                                                                                                                                                                                                                               Sistema de coordenadas para las coordenadas geográficas del fichero de localizaciones de muestreo (*locations_file*). |                                                                                                                                                                                       EPSG:4326 |
+| crs         | location_projected  |                                                                                                                                                                                                                                                                               Sistema de coordenadas para las coordenadas proyectadas del fichero de localizaciones de muestreo (*locations_file*). |                                                                                                                                                                                      EPSG:25830 |
+| crs         |  precip_geographic  |                                                                                                                                                                                                                                     Sistema de coordenadas para las coordenadas geográficas del fichero de precipitaciones (dentro del paquete referenciado por el parámetro *precipitations_url*). |                                                                                                                                                                                       EPSG:4326 |
+| crs         |  precip_projected   |                                                                                                                                                                                                                                     Sistema de coordenadas para las coordenadas proyectadas del fichero de precipitaciones (dentro del paquete referenciado por el parámetro *precipitations_url*). |                                                                                                                                                                                      EPSG:25830 |
+| crs         |  piezo_geographic   |                                                                                                                                                                                                                                   Sistema de coordenadas para las coordenadas geográficas del fichero de medidas piezométricas (dentro del paquete referenciado por el parámetro *piezometry_url*). |                                                                                                                                                                                       EPSG:4326 |
+| crs         |   piezo_projected   |                                                                                                                                                                                                                                   Sistema de coordenadas para las coordenadas proyectadas del fichero de medidas piezométricas (dentro del paquete referenciado por el parámetro *piezometry_url*). |                                                                                                                                                                                      EPSG:25830 |
+| crs         |   final_projected   |                                                                                                                                                                                                                                                 Sistema de coordenadas global para los resultados. Todos los sistemas de referencia de entrada (proyectados o geográficos) se transformarán a éste. |                                                                                                                                                                                      EPSG:25830 |
 
-## Data sources
 
-1. Input CSV file with **sampling locations**.
+## Fuentes de datos
 
-The example file with the location sampling is taken from a study case of the SARAI project (https://webwp.igme.es/sarai), just as a sample case: one file with several columns, and among them there are two with latitude and longitude coordinates, and another column with one unique ID.
+1. **Localizaciones de muestreo**
+   
+    Fichero de texto de entrada, en formato CSV, con información sobre localizaciones de muestreo (*locations_file* en el fichero *config.ini*).
 
-It's given by *locations_file* parameter in *config.ini* file. It contains, among others, a geographic location defined by coordinates and a unique field (*location_id_field* parameter in *config.ini* file). The notebook used it as location identification in output measurements CSV files (as column name).
+    Como ejemplo sencillo, se toma un caso de estudio del proyecto SARAI (https://webwp.igme.es/sarai). Cada fila define una localización de muestreo a través de las columnas que contienen:
+   - longitud, 
+   - latitud, 
+   - identificador único.
 
-This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *location_lon*) and latitude (field *location_lat*) in *geographic* (*EPSG:4326*) reference system of coordinates.
+    Este fichero tiene como características sintácticas:
+   - carácter ';' como separador de campos.
+   - carácter ',' como separador de decimales.
 
-2. **Precipitation measurements**.
+    Un fichero puede contener uno o varios pares de coordenadas (longitud, latitud) codificadas en diferentes sistemas de referencia, bien sean geográficos o proyectados. Para cada una de ellas, se especifica en el fichero *config.ini* así como el sistema de coordenadas empleado:
+   - *location_geographic* para los pares de coordenadas (*location_lon_geo*, *location_lat_geo*)
+   - *location_projected* para los pares de coordenadas (*location_lon_proj*, *location_lat_proj*)
+  
+    Se tratan de la misma forma las coordenadas y sistemas de referencia  dadas para las medidas de precipitación y piezometría. 
 
-Rainfall compiled data for all the Iberian Peninsula and Baleares between 1950 and 2020 are taken the Agencia Estatal de Meteorología (AEMET).
+    En caso de que los ficheros de entrada no tengan campos para algunos de los conceptos parametrizados en el fichero *config.ini*, simplemente se dejan en blanco los valores asociados a dichos parámetros.
 
-Coded as an input parameter *precipitations_url* in the *config.ini* configuration file. It points by default to a packed, compressed file (*\*.tar.gz*) located in [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). It contains three files:
+2. **Medidas de precipitación**
 
-- *README.txt*, which informs about the content of files,
+    Los datos de precipitación registrados para toda la Península y Baleares entre 1951 y 2020 han sido proporcionados por la Agencia Estatal de Meteorología (AEMET). Están referenciados por el parámetro de entrada *precipitations_url* en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.tar.gz*) localizado en [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). 
 
-- *maestro_red_hr_SPAIN.txt*, with precipitation grid coordinates and their IDs,
+    El contenido del paquete comprimido consiste en:
 
-- *pcp_red_SPAIN_1951-2020.txt*, historical precipitation file that contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31.
+   - un fichero llamado *README.txt*, que contiene información relevante sobre el contenido del paquete de ficheros,
 
-3. **Piezometric measurements**. Piezometric compiled data base for all the Iberian Peninsula and Baleares until 2020 are taken from the Ministerio de Transición Ecológica y Reto Demográfico
+   - *maestro_red_hr_SPAIN.txt*, que es un fichero de texto plano con las coordendas de los puntos de medida de precipitación y su identificador numérico,
 
-Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
+   - *pcp_red_SPAIN_1951-2020.txt*, que es otro fichero de texto plano que contiene el histórico de medidas de precipitación interpolada en una malla con resolución espacial de 5x5 km, y resolución temporal de un día desde el 01-01-1951 hasta el 31-12-2020.
 
-- The first one contains information about piezometers and geographical locations (with *geometry* as coordinate reference system)
+3. **Medidas de piezometría**. 
+   
+    Medidas recopiladas de la base de datos del Ministerio de Transición Ecológica y Reto Demográfico para toda la Península Ibérica y Baleares hasta 2020.
 
-- The second one includes historical piezometrical measurements.
+    La ubicación de esa información se define a través del parámetro  *piezometry_url*, en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.zip*) con la siguiente dirección web [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). Este fichero comprimido contiene una base de datos de Microsft Access (.mdb). Tiene dos tablas:
 
-## Association criteria between input sampling locations and precipitations/piezometric files
+   - La primera contiene información de los piezómetros y su ubicación geográfica (en sistema de referencia proyectado).
 
-Only sources inside a 5 km buffer are taken into account.
+   - La segunda incluye el histórico de medidas piezométricas tomadas en las ubicaciones referenciadas en la otra tabla.
+  
+    El Notebook, descarga, descomprime y lee la base de datos. Como salida, genera dos ficheros CSV (uno por cada tabla) para su posterior procesamiento. También, este formato normalizado hace que esta información sea accesible por cualquier otro usuario que no disponga de la suite de Microsoft Office.
 
-### Precipitation
-Two criteria applied:
-1. Precipitation of the closest point to the sampling location.
-2. Interpolated precipitation by inverse distance weighting average method for sources closer or equal to 5 km.
+## Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría
 
-### Piezometry
-Only one criterium
-1. The most extended temporal piezometric series (for sources with measurements closest or equal to 5 km) is associated with each sampling location.
+Sólo las fuentes de datos de piezometría y precipitación cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La distancia máxima en metros se establece en el parámetro *radius*, en el fichero *config.ini*. 
 
-## Output files
+### Precipitación
 
-Located in **output_dir** (*./results*) directory given by *config.ini* configuration file.
+Para la asociación entre localizaciones de muestreo y puntos de medida de precipitación, se aplican dos criterios:
 
-- **out_interp_precip** (*historico_precipitaciones_ponderado_distancia.csv*), with historical interpolated precipitation measurements, weighted by inverse of distance.
+1. Asignación directa de la precipitación del punto más cercano con medidas a cada localización de muestreo.
+2. Asignación de la media de la precipitación ponderada por el inverso de la distancia entre la localización de muestero y los puntos con medidas de precipitación dentro de un área circular centrada en el punto de muestreo y de radio pr el parámetro *radius* en metros.
+   
+### Piezometría
 
-- **out_closest_prepic** (*historico_precipitaciones_punto_mas_cercano.csv*), with historical interpolated precipitation equals to the closest point with measurements.
+Sólo se asocia siguiendo el siguiente criterio:
 
-- **out_longer_piezo** (*historico_piezometrias.csv*), with measurements of longest temporal serie of piezometry taken inside a buffer of, by default, **radius** (*5.000 m*).
+1. Se selecciona la serie piezométrica más larga de entre las ubicaciones de los piezómetros más cercanos a cada localización de muestreo (buffer circular centrado en el punto de muestreo y radio máximo dado por el parámetro *radius*).
 
-- JPG files: all figures generated and showed in the notebook.
+## Ficheros de salida
 
-CSV output files have following structure: 
+El Notebook los ubica en el directorio dado por el parámetro *output_dir*, en el fichero *config.ini*. Por defecto, se le ha asignado el valor *./results*, que representa un directorio llamado *results* ubicado en el mismo directorio que el fichero del Notebook. No es necesario crearlo de forma manual. El Notebook se encarga de hacerlo si no existe.
 
-*date,ID1, ID2, ID3,...,IDN*
+Los otros parámetros relacionados con ficheros de salida son:
 
-where IDs are the unqie values that identify precipitation grid nodes or piezometers.
+- *out_interp_precip* (por defecto *historico_precipitaciones_ponderado_distancia.csv*). Almacena el histórico de precipitaciones calculadas según la media de precipitaciones ponderadas por el inverso de la distancia.
 
-## Acknowledgements
+- *out_closest_prepic* (por defecto *historico_precipitaciones_punto_mas_cercano.csv*). Las medidas de precipitación histórica corresponden a la del punto con medida de precipitación más cercana a cada localización de interés.
 
-This work is part of the SARAI project of the Spanish Science and Innovation Ministry with reference PID2020-116540RB-C22 funded by MCIN/ AEI /10.13039/501100011033. This work has been performed within the SARAI subproject led by the Geological and Mining Institute of Spain (CN IGME), a research body integrated into the Higher Council for Scientific Research (CSIC).
-Project link: https://webwp.igme.es/sarai/index.php/en/home/
-We would like to thank 
-- AEMET (https://www.aemet.es/) for the precipitation data used in this notebook.
-- MINECO (https://www.miteco.gob.es/) because of the piezometric information used in this work.
+- *out_longer_piezo* (por defecto *historico_piezometrias.csv*), que almacena las medidas con mayor duración temporal para cada punto de localización a distancia inferior a la dada por el parámetro *radius*. Si no hay piezómetros en ese radio, no se asigna medida a la localización de muestreo.
+
+- Adicionalmente, también se guardan todas las imágenes y gráficas generadas por el Notebook.
+
+Todos los ficheros de texto en formato CSV  que se generan relacionados con precipitación y piezometría, tienen la siguiente estructura: 
+
+*Fecha,ID1, ID2, ID3,...,IDN*
+
+donde los IDs se corresponden con los valores del campo *location_label* único que identifica cada una de las localizaciones de muestreo.
+
+
+## Agradecimientos
+
+Este trabajo es parte del proyecto SARAI del Ministerio de Ciencia e Innovación, con referencia PID2020-116540RB-C22 y financiado por MCIN/ AEI /10.13039/501100011033. Este trabajo ha sido desarrollado dentro del subproyecto liderado por el Instituto Geológico y Minero de España (CN IGME), como centro de investigación integrado en el Consejo Superior de Investigaciones Científicas (CSIC).
+
+Enlace al proyecto: https://webwp.igme.es/sarai/index.php/en/home/ 
+
+Nos gustaría agradecer
+
+- AEMET (https://www.aemet.es/), por facilitar los datos de precipitación usados en este Notebook.
+- MINECO (https://www.miteco.gob.es/) , por proporcionar la información sobre estaciones piezométricas y sus mediciones que han sido usadas en este trabajo.
+
 
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
 
 ![MITECO Logo](/sample_images/miteco_logo.png)
 
-## Contact
+## Contacto
 
-Our names are:
+Estas somos las personas que hemos llevado a cabo este trabajo:
+
 - César Husillos Rodríguez (c.husillos@igme.es), 
 - Carolina Guardiola Albert (c.guardiola@igme.es), 
 - Héctor Aguilera Alonso (h.aguilera@igme.es),
 - Pablo Ezquerro Martín (p.ezquerro@igme.es)
 - Ángel Prieto Martín (a.prieto@igme.es). 
   
-You can contact us just via e-mail or look for us on GitHub.
+Pueden contactarnos vía correo electrónico o buscarnos en GitHub.
 
-## License
+## Licencia
 
-This project is licensed under the terms of the GNU General Public License v3.0
-
-## Example
-
-We will show you some screen captures for illustrating the notebook algorithm.
-
-### 1. Loading locations of interest
-
-First, the input data file is a CSV text format file with the character  ';' as the field separator and '.' as the thousand marker.
-
-```python
-locations_file = config.get('paths', 'locations_file') # reading input CSV file path from 'config.ini' file
-df_loc = pd.read_csv(locations_file, sep=';', decimal=',') 
-id_loc = config.get('fields', 'location_id_field') # reading field ID from 'config.ini' file
-df_loc = df_loc.set_index(id_loc, drop=False)
-print(df_loc.info()) # showing input dataframe info
-```
-
-After that, plot sampling locations.
-
-![Sampling locations](/sample_images/localizaciones_de_muestreo.jpg)
-
-### 2. Downloading and processing precipitation data
-
-The next step is to load precipitation data, filtering to the exciting area and plotting both on a map.
-
-![Sampling locations and precipitations grid](/sample_images/nodos_precipitacion_En_area_de_muestreo.jpg)
-
-As mentioned before, there are two association algorithms. Taking into account the 'buffer' mode, the assotiations between sampling places and precipitation node grids are showed in the following picture.
-
-![Number of precipitation nodes linked to sampling locations](/sample_images/histograma_asociacion_nodos_precipitacion-puntos_muestreo.jpg)
-
-In case of the closest association method is applied, the next one shows the closest sources implementation for a precipitation node of the grid (given by ID = 1868).
-
-![Sampling locations associated to precipitation node grid labelled as 1868](/sample_images/localizaciones_mas_proximas_al_nodo_de_precipitacion_1868.jpg)
-
-Next figure shows all precipitation nodes associated with sampling locations.
-
-![Sampling locations and selected node of the precipitations grid](/sample_images/nodos_de_precipitacion_seleccionados.jpg)
-
-and the histogram of distances between associated locations
-
-![distance between sampling and precipitation node locations histogram ](/sample_images/histograma_distancias_nodos_precipitacion-puntos_muestreo.jpg)
+Este proyecto se ha desarrollado bajo la licencia GNU General Public License v3.0.
 
 
-Of course, the notebook generates two CSV files with 
+## Ejemplo de uso
 
-- precipitation related to the closest node-sampling location, and
-- precipitation computed used the inverse of distance node-sampling location for grid nodes inside a buffer of predefined distance.
+Se mostrará a través de sucesivas capturas de pantalla que ilustrarán las fases de operación del Notebook.
 
-Column names are :
-- date of measure and
-- 'location_lable' field from the *config.ini* file, that identifies each sampling location.
+### 1. Carga de localizaciones de muestreo
+
+El fichero de texto que contiene esta información es un CSV que viene referenciado por el parámetro *locations_file* dentro de la sección *paths*. Tiene
+- ';' como carácter separador de campos.
+- ',' como carácter separador de decimales.
   
-### 3. Downloading and processing piezometric data
+El código que carga esta información en el Notebook se muestra a continuación:
 
-The process applied to piezometric measures is the same.
 
-![Sampling locations and piezometers grid](/sample_images/piezometros_en_zona_de_muestreo.jpg)
+    # lectura el fichero de parámetros'config.ini'
+    locations_file = config.get('paths', 'locations_file')
 
-In this case, the association is given between piezometric and sampling locations whose 
-- temporal length series is the longest one and
-- distance is lower than the number of meters given by the *radius* parameter in the input *config.ini* file.
+    # lectura ficheros de localizaciones de muestreo 
+    df_loc = pd.read_csv(locations_file, sep=';', decimal=',')
 
-The following image shows piezometers associated with sampling locations.
+    # obteniendo el valor del parámetro 'location_id' 
+    id_loc = config.get('fields', 'location_id') 
 
-![Sampling locations and selected node of the piezometer locations](/sample_images/piezometros_seleccionados.jpg)
+    # estableciendo este campo como índice del DataFrame
+    df_loc = df_loc.set_index(id_loc, drop=False)
 
-And this one the histogram of distances between these associations.
+    # mostrando información de las localizaciones de muestreo
+    print(df_loc.info()) 
 
-![distance between sampling and piezometer locations histogram ](/sample_images/histograma_distancias_a_piezometros.jpg)
 
-Here is the the histogram that shows number of sampling locations associated to each piezometer.
+Leída la información, se muestra su ubcicación en un mapa.
 
-![association between sampling and piezometer locations histogram ](/sample_images/localizaciones_asociadas_a_piezometros.jpg)
+![Localizaciones de muestreo](/sample_images/localizaciones_de_muestreo.jpg)
 
-And finally, the following figure shows sampling locations associated with the most popular piezometer (IDPIEZ=2015).
+### 2. Descarga y procesado de la información sobre precipitación
+
+El paso siguiente consiste en la descarga del paquete de datos sobre el histórico de precipitaciones, su filtrado a la zona de las localizaciones de muestreo y pintarlas en un mapa.
+
+![Localizaciones de muestreo y puntos con información sobre la precipitación](/sample_images/nodos_precipitacion_En_area_de_muestreo.jpg)
+
+
+Para la determinación de la precipitación en las ubicaciones de muestreo, hay dos algoritmos en consideración:
+
+1. calcular la media ponderada por el inverso de la distancia para los puntos con precipitación dentro de un radio máximo de distancia (en metros). 
+2. tomar las medidas del punto más cercano.
+  
+Si usamos el primer método (media ponderada por el inverso de la distancia), cada localización de muestreo tendrá un número variable de nodos de precipitación cercanos. El siguiente diagrama de barras muestra esa relación.
+
+![Número de nodos de precipitación asociadas a localizaciones de muestreo](/sample_images/histograma_asociacion_nodos_precipitacion-puntos_muestreo.jpg)
+
+Si consideramos el caso de asociación al punto de precipitación más cercano, el siguiente mapa muestra las ubicaciones de muestreo que se asocian a la precipitación medida en un punto de la malla de precipitaciones (la que viene dada por el ID = 1868).
+
+![Puntos de muestreo asociados al nodo de precipitación etiquetado con ID=1868](/sample_images/localizaciones_mas_proximas_al_nodo_de_precipitacion_1868.jpg)
+
+La siguente figura muestra todos los nodos de precipitación asociadas a las localizaciones de muestreo consideradas en este trabajo.
+
+![Puntos de precipitación asociados a los puntos de muestreo Según el criterio de mínima distancia.](/sample_images/nodos_de_precipitacion_seleccionados.jpg)
+
+Y la figura que sigue muestra el histograma de distancias mínimas entre localizaciones de muestreo y puntos donde se ha registrado la precipitación.
+
+![histograma de distancias mínimas entre localizaciones de muestreo y puntos de precipitación](/sample_images/histograma_distancias_nodos_precipitacion-puntos_muestreo.jpg)
+
+Como objetivo final, el Notebook genera dos ficheros en formato CSV. Uno para la asociación según el algoritmo de mínima distancia, y otro para el de media ponderada por el inverso de las distancias. Las columnas incluyen en ambos casos:
+
+- fecha de medida de precipitación
+- campos con el campo *location_label* (dado en el fichero *config.ini*) que identifican de forma unívoca la localización de muestreo.
+  
+### 3. Descarga y procesado de datos piezométricos
+
+Se aplica un proceso similar al caso de la precipitación.
+
+![Puntos de muestreo y ubicaciones de los piezómetros](/sample_images/piezometros_en_zona_de_muestreo.jpg)
+
+A la hora de realizar la asociación entre puntos de medida piezométrica y localizaciones de muestreo, se establecen pares entre puntos
+- cuya distancia entre ellos sean menor que la dada por el valor del parámetro *radius* (en el fichero *config.ini*) medida en metros.
+- si hay varios puntos que cumplen la anterior condición de distancia, se selecciona aquel cuya serie temporal de medidas piezométricas sea la más larga.
+
+La siguiente imagen muestra los piezómetros relacionados con las ubicaciones de muestreo.
+
+
+![Localizaciones de muestreo y los piezómetros con los que se relacionan](/sample_images/piezometros_seleccionados.jpg)
+
+El siguiente histograma muestra la distribución de distancias entre localizaciones de muestreo y las ubicaciones de piezómetros a los que se asocian.
+
+![Distancia entre puntos de muesteo y ubicaciones ed piezómetros asociados](/sample_images/histograma_distancias_a_piezometros.jpg)
+
+A continuación, este diagrama de barras muestra el número de localizaciones de muestreo asociadas a cada piezómetro. El número que aparece en el eje de abscisas es el identificador único del piezómetro.
+
+![Número de asociaciones entre piezómetros y lugares de muestreo ](/sample_images/localizaciones_asociadas_a_piezometros.jpg)
+
+Finalmente, la siguiente figura muestra sobre un mapa la distribución espacial de localizaciones de muestreo asociadas al más popular de los piezómetros.
 
 ![Sampling locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
 
-Again, the notebook generates a CSV file with associated piezometric measurements to sampling locations as output.
+Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. A diferencia de los ficheros de salida de precipitación, no todos los puntos de muestreo se representan en el fichero de salida de piezometría. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius* en metros.
 
 
