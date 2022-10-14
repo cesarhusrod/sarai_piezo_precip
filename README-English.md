@@ -31,6 +31,7 @@
     - [13.3. Downloading and processing piezometric data](#133-downloading-and-processing-piezometric-data)
 
 <!-- /TOC -->
+
 # Precipitation and Piezometry in SARAI
 
 ## 1. Introduction
@@ -317,7 +318,14 @@ Our names are:
   
 You can contact us just via e-mail or look for us on GitHub.
 
-This is the repository DOI: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+Repository DOI: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+
+**Related links**
+
+- ZENODO: [https://www.zenodo.org/record/7196959#.Y0kH5EzP0uV](https://www.zenodo.org/record/7196959#.Y0kH5EzP0uV)
+
+- GitHub: [https://github.com/cesarhusrod/sarai_piezo_precip](https://github.com/cesarhusrod/sarai_piezo_precip)
+
 
 [Up](#up)
 

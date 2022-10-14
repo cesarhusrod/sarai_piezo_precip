@@ -382,7 +382,14 @@ Estas somos las personas que hemos llevado a cabo este trabajo:
   
 Pueden contactarnos vía correo electrónico o buscarnos en GitHub.
 
-Este es es DOI del repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+DOI del repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+
+**Enlaces relacionados**
+
+- ZENODO: [https://www.zenodo.org/record/7196959#.Y0kH5EzP0uV](https://www.zenodo.org/record/7196959#.Y0kH5EzP0uV)
+
+- GitHub: [https://github.com/cesarhusrod/sarai_piezo_precip](https://github.com/cesarhusrod/sarai_piezo_precip)
+
 
 [Volver al principio](#arriba)
 
