@@ -261,15 +261,21 @@ Our names are:
   
 You can contact us just via e-mail or look for us on GitHub.
 
-## 12. License
+This is the repository DOI: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+
+## 12. How to cite this work
+
+Cesar Husillos;Carolina Guardiola-Albert;Héctor Aguilera-Alonso;Marta Béjar-Pizarro;Pablo Ezquerro; Ángel Prieto-Martín;2022, precipitacion_y_piezometria.ipynb, v1.0.0, Zenodo, doi:10.5281/zenodo.7196959, as developed on GitHub
+
+## 13. License
 
 This project is licensed under the terms of the GNU General Public License v3.0
 
-## 13. Example
+## 14. Example
 
 We will show you some screen captures for illustrating the notebook algorithm.
 
-### 13.1. Loading locations of interest
+### 14.1. Loading locations of interest
 
 First, the input data file is a CSV text format file with the character  ';' as the field separator and '.' as the thousand marker.
 
@@ -285,7 +291,7 @@ After that, plot sampling locations.
 
 ![Sampling locations](/sample_images/localizaciones_de_muestreo.jpg)
 
-### 13.2. Downloading and processing precipitation data
+### 14.2. Downloading and processing precipitation data
 
 The next step is to load precipitation data, filtering to the exciting area and plotting both on a map.
 
@@ -317,7 +323,7 @@ Column names are :
 - date of measure and
 - 'location_lable' field from the *config.ini* file, that identifies each sampling location.
   
-### 13.3. Downloading and processing piezometric data
+### 14.3. Downloading and processing piezometric data
 
 The process applied to piezometric measures is the same.
 

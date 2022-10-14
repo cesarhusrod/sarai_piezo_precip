@@ -316,16 +316,23 @@ Estas somos las personas que hemos llevado a cabo este trabajo:
   
 Pueden contactarnos vía correo electrónico o buscarnos en GitHub.
 
-## 12. Licencia
+Este es es DOI que enlaza con el repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+
+## 12. Cómo citar este repositorio de Software
+
+
+Cesar Husillos;Carolina Guardiola-Albert;Héctor Aguilera-Alonso;Marta Béjar-Pizarro;Pablo Ezquerro; Ángel Prieto-Martín;2022, precipitacion_y_piezometria.ipynb, v1.0.0, Zenodo, doi:10.5281/zenodo.7196959, as developed on GitHub
+
+## 13. Licencia
 
 Este proyecto se ha desarrollado bajo la licencia GNU General Public License v3.0.
 
 
-## 13. Ejemplo de uso
+## 14. Ejemplo de uso
 
 Se mostrará a través de sucesivas capturas de pantalla que ilustrarán las fases de operación del Notebook.
 
-### 13.1. Lectura del fichero de configuración 
+### 14.1. Lectura del fichero de configuración 
 
 ```python
 # Lectura del fichero de configuración
@@ -337,7 +344,7 @@ A partir de este momento el valor de cualquier parámetro es accesible mediante 
 ```python
 valor_parametro = config.get('sección', 'nombre_parámetro')
 ```
-### 13.2. Carga de localizaciones de muestreo
+### 14.2. Carga de localizaciones de muestreo
 
 El fichero de texto que contiene esta información es un CSV que viene referenciado por el parámetro *locations_file* dentro de la sección *paths*. Tiene
 - ';' como carácter separador de campos.
@@ -365,7 +372,7 @@ Leída la información, se muestra su ubicación en un mapa.
 
 ![Localizaciones de muestreo](/sample_images/localizaciones_de_muestreo.jpg)
 
-### 13.3. Descarga y procesado de la información sobre precipitación
+### 14.3. Descarga y procesado de la información sobre precipitación
 
 El paso siguiente consiste en la descarga del paquete de datos sobre el histórico de precipitaciones.
 
@@ -402,7 +409,7 @@ Como objetivo final, el Notebook genera dos ficheros en formato CSV. Uno para la
 - fecha de medida de precipitación
 - campos con el campo *location_label* (dado en el fichero *config.ini*) que identifican de forma unívoca la localización de muestreo.
   
-### 13.4. Descarga y procesado de datos piezométricos
+### 14.4. Descarga y procesado de datos piezométricos
 
 Se aplica un proceso similar al caso de la precipitación.
 
