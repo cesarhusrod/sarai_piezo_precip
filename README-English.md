@@ -1,11 +1,43 @@
+<a id="up"></a> 
+
 ![Funding Ministery](/sample_images/ministerio_ciencia_logo.jpg)
 
+<!-- TOC -->
 
+- [Precipitation and Piezometry in SARAI](#precipitation-and-piezometry-in-sarai)
+  - [1. Introduction](#1-introduction)
+  - [2. Methodology](#2-methodology)
+  - [3. Repository download](#3-repository-download)
+  - [4. Requirements and software installation](#4-requirements-and-software-installation)
+    - [4.1. How to import the SARAI enviroment file](#41-how-to-import-the-sarai-enviroment-file)
+  - [5. Configuration file](#5-configuration-file)
+    - [5.1. Config file structure and syntax](#51-config-file-structure-and-syntax)
+    - [5.2. Available parameters and default values](#52-available-parameters-and-default-values)
+  - [6. Data sources](#6-data-sources)
+    - [6.1. Input CSV file with sampling locations](#61-input-csv-file-with-sampling-locations)
+    - [6.2. Precipitation measurements](#62-precipitation-measurements)
+    - [6.3. Piezometric measurements](#63-piezometric-measurements)
+  - [7. Association criteria between input sampling locations and precipitations/piezometric files](#7-association-criteria-between-input-sampling-locations-and-precipitationspiezometric-files)
+    - [7.1. Precipitation](#71-precipitation)
+    - [7.2. Piezometry](#72-piezometry)
+  - [8. Output files](#8-output-files)
+  - [9. Acknowledgements](#9-acknowledgements)
+  - [10. Contact](#10-contact)
+  - [11. How to cite this work](#11-how-to-cite-this-work)
+  - [12. License](#12-license)
+  - [13. Example](#13-example)
+    - [13.1. Loading locations of interest](#131-loading-locations-of-interest)
+    - [13.2. Downloading and processing precipitation data](#132-downloading-and-processing-precipitation-data)
+    - [13.3. Downloading and processing piezometric data](#133-downloading-and-processing-piezometric-data)
+
+<!-- /TOC -->
 # Precipitation and Piezometry in SARAI
 
 ## 1. Introduction
 
 The target of this Notebook is to complete available information about some sampling locations with precipitation and piezometrical measurements taken form other places.
+
+[Up](#up)
 
 ## 2. Methodology
 
@@ -14,6 +46,8 @@ The notebook code reads data given by CSV input file (**sampling locations**) an
 1. downloads precipitation and piezometric historical measurements from two internet sources,
 2. associates previous measurements with sampling locations given by the input file and, finally,
 3. generates output CSV files with measurements or interpolated measurements associated with the closest input sampling locations.
+
+[Up](#up)
 
 ## 3. Repository download
 
@@ -27,6 +61,7 @@ It generates a new folder in your computer called *sarai_piezo_precip* with all 
 
 **NOTE**: *sarai_piezo_precip* folder is available in the directory where the GIT console or the terminal executes the mentioned command.
 
+[Up](#up)
 
 ## 4. Requirements and software installation
 
@@ -35,7 +70,9 @@ It's pretty simple:
 1. Install [anaconda](https://www.anaconda.com/) on your computer and 
 2. import the repository file *environment_sarai.yml* using *Anaconda.Navigator* program. It generates a new environment that allows the notebook to run without problems.
 
-## 5. How to import the SARAI enviroment file 
+[Up](#up)
+
+### 4.1. How to import the SARAI enviroment file 
 
 Following screenshots show you how to run the SARAI Notebook step by step. The first one is to launch **Anaconda.Navigator** program. After that:
 
@@ -73,12 +110,15 @@ Now, sarai environmet is activated and ready for use.
 
 Congratulations! Now you can execute or edit what you want in this notebook.
 
+[Up](#up)
 
-## 6. Configuration file
+## 5. Configuration file
 
 It is named *config.ini* and is used by the Notebook as an input parameters file. It is self-explaining (some comments describe each parameter).
 
-### 6.1. Config file structure and syntax
+[Up](#up)
+
+### 5.1. Config file structure and syntax
 
 *config.ini* is a file text. The structure has two types of lines:
 - Section line.
@@ -118,8 +158,9 @@ Default parameter values allow you to run and test all cells of the SARAI reposi
    - All values are considered as string data type by the Notebook.
    - The Notebook cells that process URL parameters and detailed plots were developed exclusively for given default values. If you change them, you'll have to modify them according to compression and package methods used by new sources pointed by the parameters group by URLs section or values filtered from them.
 
+[Up](#up)
 
-### 6.2. Available parameters and default values
+### 5.2. Available parameters and default values
 
 This table shows you information about parameters you can find in config.ini file.:
 
@@ -169,9 +210,11 @@ This table shows you information about parameters you can find in config.ini fil
 
 <sup>2</sup> [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz) (TAR.GZ)
 
-## 7. Data sources
+[Up](#up)
 
-1. Input CSV file with **sampling locations**.
+## 6. Data sources
+
+### 6.1. Input CSV file with sampling locations
 
 The example file with the location sampling is taken from a study case of the SARAI project (https://webwp.igme.es/sarai), just as a sample case: one file with several columns, and among them there are two with latitude and longitude coordinates, and another column with one unique ID.
 
@@ -179,7 +222,7 @@ It's given by *locations_file* parameter in *config.ini* file. It contains, amon
 
 This file must have the character ';' as the field delimiter. Sampling location coordinates are given by geographic coordinates longitude (field *location_lon*) and latitude (field *location_lat*) in *geographic* (*EPSG:4326*) reference system of coordinates.
 
-2. **Precipitation measurements**.
+### 6.2. Precipitation measurements
 
 Rainfall compiled data for all the Iberian Peninsula and Baleares between 1950 and 2020 are taken the Agencia Estatal de Meteorología (AEMET).
 
@@ -191,7 +234,9 @@ Coded as an input parameter *precipitations_url* in the *config.ini* configurati
 
 - *pcp_red_SPAIN_1951-2020.txt*, historical precipitation file that contains interpolated precipitation measurements in a grid with a spatial resolution of 5x5 km, and temporal resolution of one day from 1951-01-01 to 2020-21-31.
 
-3. **Piezometric measurements**. Piezometric compiled data base for all the Iberian Peninsula and Baleares until 2020 are taken from the Ministerio de Transición Ecológica y Reto Demográfico
+### 6.3. Piezometric measurements
+
+Piezometric compiled data base for all the Iberian Peninsula and Baleares until 2020 are taken from the Ministerio de Transición Ecológica y Reto Demográfico
 
 Coded again as input parameter *piezometry_url* in the *config.ini* configuration file. It points by default to a compressed file (*\*.zip*) available thought URL [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). This package is composed by two files:
 
@@ -199,23 +244,28 @@ Coded again as input parameter *piezometry_url* in the *config.ini* configuratio
 
 - The second one includes historical piezometrical measurements.
 
-## 8. Association criteria between input sampling locations and precipitations/piezometric files
+[Up](#up)
+
+## 7. Association criteria between input sampling locations and precipitations/piezometric files
 
 As spatial criterium applied to both measurements (precipitation and piezometry), only sources inside a 5 km buffer around each samplig location are taken into account.
 
-### 8.1. Precipitation
+### 7.1. Precipitation
 Two additional criteria are applied, depending on what mesarurement is associated:
 
 1. Precipitation of the closest point to the sampling location.
    
 2. Interpolated precipitation by inverse distance weighting average method for sources closer or equal to 5 km.
 
-### 8.2. Piezometry
+### 7.2. Piezometry
 Only one additional criterium:
 
 1. The most extended temporal piezometric series (for sources with measurements closest or equal to 5 km) is associated with each sampling location.
 
-## 9. Output files
+[Up](#up)
+
+
+## 8. Output files
 
 Located in **output_dir** (*./results*) directory given by *config.ini* configuration file.
 
@@ -233,7 +283,10 @@ CSV output files have following structure:
 
 where IDs are the unique values (given by *location_label* parameter in *config.ini* file) that identify precipitation grid nodes or piezometers.
 
-## 10. Acknowledgements
+[Up](#up)
+
+
+## 9. Acknowledgements
 
 This work is part of the SARAI project of the Spanish Science and Innovation Ministry with reference PID2020-116540RB-C22 funded by MCIN/ AEI /10.13039/501100011033. This work has been performed within the SARAI subproject led by the Geological and Mining Institute of Spain (CN IGME), a research body integrated into the Higher Council for Scientific Research (CSIC).
 
@@ -248,7 +301,10 @@ We would like to thank
 
 ![MITECO Logo](/sample_images/miteco_logo.png)
 
-## 11. Contact
+[Up](#up)
+
+
+## 10. Contact
 
 Our names are:
 
@@ -263,19 +319,31 @@ You can contact us just via e-mail or look for us on GitHub.
 
 This is the repository DOI: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
 
-## 12. How to cite this work
+[Up](#up)
+
+
+## 11. How to cite this work
 
 Cesar Husillos;Carolina Guardiola-Albert;Héctor Aguilera-Alonso;Marta Béjar-Pizarro;Pablo Ezquerro; Ángel Prieto-Martín;2022, precipitacion_y_piezometria.ipynb, v1.0.0, Zenodo, doi:10.5281/zenodo.7196959, as developed on GitHub
 
-## 13. License
+[Up](#up)
+
+
+## 12. License
 
 This project is licensed under the terms of the GNU General Public License v3.0
 
-## 14. Example
+[Up](#up)
+
+
+## 13. Example
 
 We will show you some screen captures for illustrating the notebook algorithm.
 
-### 14.1. Loading locations of interest
+[Up](#up)
+
+
+### 13.1. Loading locations of interest
 
 First, the input data file is a CSV text format file with the character  ';' as the field separator and '.' as the thousand marker.
 
@@ -291,7 +359,10 @@ After that, plot sampling locations.
 
 ![Sampling locations](/sample_images/localizaciones_de_muestreo.jpg)
 
-### 14.2. Downloading and processing precipitation data
+[Up](#up)
+
+
+### 13.2. Downloading and processing precipitation data
 
 The next step is to load precipitation data, filtering to the exciting area and plotting both on a map.
 
@@ -323,7 +394,10 @@ Column names are :
 - date of measure and
 - 'location_lable' field from the *config.ini* file, that identifies each sampling location.
   
-### 14.3. Downloading and processing piezometric data
+[Up](#up)
+
+
+### 13.3. Downloading and processing piezometric data
 
 The process applied to piezometric measures is the same.
 
@@ -350,5 +424,8 @@ And finally, the following figure shows sampling locations associated with the m
 ![Sampling locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
 
 Again, the notebook generates a CSV file with associated piezometric measurements to sampling locations as output.
+
+
+[Up](#up)
 
 

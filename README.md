@@ -1,11 +1,44 @@
+<a id="arriba"></a> 
+
+
 ![Funding Ministery](/sample_images/ministerio_ciencia_logo.jpg)
 
 
+- [Precipitación y piezometría en SARAI](#precipitación-y-piezometría-en-sarai)
+  - [1. Introducción](#1-introducción)
+  - [2. Metodología](#2-metodología)
+  - [3. Descarga del código](#3-descarga-del-código)
+  - [4. Instalación](#4-instalación)
+    - [4.1. Proceso de importación del entorno](#41-proceso-de-importación-del-entorno)
+  - [5. Fichero de configuración](#5-fichero-de-configuración)
+    - [5.1. Estructura del fichero](#51-estructura-del-fichero)
+    - [5.2. Parámetros y valores por defecto](#52-parámetros-y-valores-por-defecto)
+  - [6. Fuentes de datos](#6-fuentes-de-datos)
+    - [6.1. Localizaciones de muestreo](#61-localizaciones-de-muestreo)
+    - [6.2. Medidas de precipitación](#62-medidas-de-precipitación)
+    - [6.3. Medidas de piezometría](#63-medidas-de-piezometría)
+  - [7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría](#7-criterios-de-asociación-entre-las-localizaciones-de-muestreo-y-las-medidas-de-precipitación-y-piezometría)
+    - [7.1. Precipitación](#71-precipitación)
+    - [7.2. Piezometría](#72-piezometría)
+  - [8. Ficheros de salida](#8-ficheros-de-salida)
+  - [9. Agradecimientos](#9-agradecimientos)
+  - [10. Contacto](#10-contacto)
+  - [11. Cómo citar este repositorio de Software](#11-cómo-citar-este-repositorio-de-software)
+  - [12. Licencia](#12-licencia)
+  - [13. Ejemplo de uso](#13-ejemplo-de-uso)
+    - [13.1. Lectura del fichero de configuración](#131-lectura-del-fichero-de-configuración)
+    - [13.2. Carga de localizaciones de muestreo](#132-carga-de-localizaciones-de-muestreo)
+    - [13.3. Descarga y procesado de la información sobre precipitación](#133-descarga-y-procesado-de-la-información-sobre-precipitación)
+    - [13.4. Descarga y procesado de datos piezométricos](#134-descarga-y-procesado-de-datos-piezométricos)
+
 # Precipitación y piezometría en SARAI
+
 
 ## 1. Introducción
 
 El objetivo de este Notebook es completar la información disponible sobre ciertos lugares de muestreo con datos de precipitación y piezometría. 
+
+[Volver al principio](#arriba)
 
 ## 2. Metodología
 
@@ -14,6 +47,8 @@ Para ello, se han programado las siguientes tareas:
 1. Descarga de la información de medidas históricas de precipitación y piezometría de dos URLs en la web,
 2. Asociación entre las ubicaciones de muestreo y las de precipitación y piezometría según ciertos criterios y, finalmente,
 3. Generación de ficheros de texto en formato CSV que contendrán las medidas de ambas magnitudes asociadas a los lugares de muestreo.
+
+[Volver al principio](#arriba)
 
 ## 3. Descarga del código
 
@@ -24,6 +59,8 @@ Lo siguiente es abrir la consola de GIT (en el caso de trabajar en Windows) o la
 ```git clone https://git.igme.es/chusillos/sarai_piezo_precip.git```
 
 Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecutado el comando anterior de nombre *sarai_piezo_precip*. Incluye todo el código necesario y los ficheros de ejemplo. Así de simple.
+
+[Volver al principio](#arriba)
 
 ## 4. Instalación
 
@@ -39,7 +76,9 @@ Tras realizar estas operaciones, podrá
 - cargar el fichero de código (*precipitacion_y_piezometria.ipynb*) y 
 - ejecutarlo sin problemas.
 
-### 5. Proceso de importación del entorno
+[Volver al principio](#arriba)
+
+### 4.1. Proceso de importación del entorno
 
 Explicamos el proceso paso a paso. Ilustramos cada uno de ellos con una captura de pantalla para facilitar la tarea. Vamos a ello.
 
@@ -79,7 +118,9 @@ Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de
 
 ¡Enhorabuena! Ya puede ejecutar el código de las celdas de notebook o editar el código que personalizar.
 
-## 6. Fichero de configuración
+[Volver al principio](#arriba)
+
+## 5. Fichero de configuración
 
 Este fichero en formato texto es muy importante. Se llama **config.ini**.  
 
@@ -93,7 +134,9 @@ El fichero *config.ini* está disponible en el directorio base del repositorio. 
 
 Es autoexplicativo en el sentido en que en el propio fichero puede obtener una breve descripción de lo que es cada parámetro y qué tipo de valor se espera.
 
-### 6.1. Estructura del fichero
+[Volver al principio](#arriba)
+
+### 5.1. Estructura del fichero
 
 Las filas del fichero *config.ini* son de dos tipos:
 
@@ -134,7 +177,9 @@ Los valores por defecto de los parámetros permiten ejecutar sin errores todas l
    - Las celdas que procesan la descarga de ficheros desde URLs en la web están codificadas específicamente para los valores asignados por defecto (modo de empaquetado y compresión, nombre, número y formato de ficheros contenidos...). Si cambia esas URLs, tendrá que adaptar el código que procesa los ficheros o paquetes que desee descargar.
 
 
-### 6.2. Parámetros y valores por defecto 
+[Volver al principio](#arriba)
+
+### 5.2. Parámetros y valores por defecto 
 
 La siguiente tabla muestra los parámetros actualmente personalizables en el fichero *config.ini*:
 
@@ -191,8 +236,10 @@ La siguiente tabla muestra los parámetros actualmente personalizables en el fic
 <sup>2</sup> [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz) (TAR.GZ)
 
 
+[Volver al principio](#arriba)
 
-## 7. Fuentes de datos
+
+## 6. Fuentes de datos
 
 El Notebook está pensado para tratar con:
 - una fuente de datos interna, dada por un fichero de entrada que determina los puntos de muestreo. 
@@ -200,7 +247,9 @@ El Notebook está pensado para tratar con:
   - precipitación (*precipitations_url*).
   - piezometría (*piezometry_url*).
    
-### 7.1. Localizaciones de muestreo
+[Volver al principio](#arriba)
+
+### 6.1. Localizaciones de muestreo
    
 Es nuestro fichero de texto de entrada, en formato CSV, con información sobre localizaciones de muestreo (*locations_file* en el fichero *config.ini*).
 
@@ -225,7 +274,9 @@ Se tratan de la misma forma las coordenadas y sistemas de referencia dadas para 
 
 En caso de que los ficheros de entrada no tengan campos para algunos de los conceptos parametrizados en el fichero *config.ini*, simplemente se dejan en blanco sus valores asociados.
 
-### 7.2. Medidas de precipitación
+[Volver al principio](#arriba)
+
+### 6.2. Medidas de precipitación
 
 Los datos de precipitación registrados para toda la Península y Baleares entre 1951 y 2020 han sido proporcionados por la Agencia Estatal de Meteorología (AEMET). Están referenciados por el parámetro de entrada *precipitations_url* en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.tar.gz*) localizado en [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). 
 
@@ -237,7 +288,9 @@ El contenido del paquete consiste en:
 
    - *pcp_red_SPAIN_1951-2020.txt*, que es otro fichero de texto plano que contiene el histórico de medidas de precipitación interpolada en una malla. Tiene una resolución espacial de 5x5 km y resolución temporal de un día, desde el 01-01-1951 hasta el 31-12-2020.
 
-### 7.3. Medidas de piezometría 
+[Volver al principio](#arriba)
+
+### 6.3. Medidas de piezometría 
    
 Medidas recopiladas de la base de datos del Ministerio de Transición Ecológica y Reto Demográfico para toda la Península Ibérica y Baleares hasta 2020.
 
@@ -249,24 +302,33 @@ Esta información viene dada a través del parámetro  *piezometry_url*, en el f
   
 El Notebook, descarga, descomprime y lee la base de datos. Como salida, genera dos ficheros CSV (uno por cada tabla) para su posterior procesamiento. El hecho de generar estos ficheros CSV se justifica porque es un formato normalizado, que facilita el acceso a la información por parte de cualquier otro usuario que disponga de un simple editor de texto plano.
 
-## 8. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría
+[Volver al principio](#arriba)
+
+## 7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría
 
 Sólo las fuentes de datos de piezometría y precipitación cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La distancia máxima en metros se establece en el parámetro *radius*, en el fichero *config.ini*. 
 
-### 8.1. Precipitación
+
+[Volver al principio](#arriba)
+
+### 7.1. Precipitación
 
 Para la asociación entre localizaciones de muestreo y puntos de medida de precipitación, se aplican dos criterios:
 
 1. Asignación directa de la precipitación del punto más cercano con medidas a cada localización de muestreo.
 2. Asignación de la media de la precipitación ponderada por el inverso de la distancia entre la localización de muestero y los puntos con medidas de precipitación dentro de un área circular centrada en el punto de muestreo y de radio pr el parámetro *radius* en metros.
    
-### 8.2. Piezometría
+[Volver al principio](#arriba)
+
+### 7.2. Piezometría
 
 Sólo se asocia siguiendo el siguiente criterio:
 
 1. Se selecciona la serie piezométrica más larga de entre las ubicaciones de los piezómetros más cercanos a cada localización de muestreo (buffer circular centrado en el punto de muestreo y radio máximo dado por el parámetro *radius*).
 
-## 9. Ficheros de salida
+[Volver al principio](#arriba)
+
+## 8. Ficheros de salida
 
 El Notebook los ubica en el directorio dado por el parámetro *output_dir*, en el fichero *config.ini*. Por defecto, se le ha asignado el valor *./results*, que representa un directorio llamado *results* ubicado en el mismo directorio que el fichero del Notebook. No es necesario crearlo de forma manual. El Notebook se encarga de hacerlo si no existe.
 
@@ -286,8 +348,10 @@ Los ficheros de texto que se generan relacionados con precipitación y piezometr
 
 donde los IDs se corresponden con los valores del campo *location_label*, identificador universal único para cada una de las localizaciones de muestreo.
 
+[Volver al principio](#arriba)
 
-## 10. Agradecimientos
+
+## 9. Agradecimientos
 
 Este trabajo es parte del proyecto SARAI del Ministerio de Ciencia e Innovación, con referencia PID2020-116540RB-C22 y financiado por MCIN/ AEI /10.13039/501100011033. Este trabajo ha sido desarrollado dentro del subproyecto liderado por el Instituto Geológico y Minero de España (CN IGME), como centro de investigación integrado en el Consejo Superior de Investigaciones Científicas (CSIC).
 
@@ -303,7 +367,9 @@ Nos gustaría agradecer
 
 ![MITECO Logo](/sample_images/miteco_logo.png)
 
-## 11. Contacto
+[Volver al principio](#arriba)
+
+## 10. Contacto
 
 Estas somos las personas que hemos llevado a cabo este trabajo:
 
@@ -316,23 +382,33 @@ Estas somos las personas que hemos llevado a cabo este trabajo:
   
 Pueden contactarnos vía correo electrónico o buscarnos en GitHub.
 
-Este es es DOI que enlaza con el repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
+Este es es DOI del repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://zenodo.org/badge/latestdoi/550928627)
 
-## 12. Cómo citar este repositorio de Software
+[Volver al principio](#arriba)
+
+
+## 11. Cómo citar este repositorio de Software
 
 
 Cesar Husillos;Carolina Guardiola-Albert;Héctor Aguilera-Alonso;Marta Béjar-Pizarro;Pablo Ezquerro; Ángel Prieto-Martín;2022, precipitacion_y_piezometria.ipynb, v1.0.0, Zenodo, doi:10.5281/zenodo.7196959, as developed on GitHub
 
-## 13. Licencia
+
+[Volver al principio](#arriba)
+
+## 12. Licencia
 
 Este proyecto se ha desarrollado bajo la licencia GNU General Public License v3.0.
 
 
-## 14. Ejemplo de uso
+[Volver al principio](#arriba)
+
+## 13. Ejemplo de uso
 
 Se mostrará a través de sucesivas capturas de pantalla que ilustrarán las fases de operación del Notebook.
 
-### 14.1. Lectura del fichero de configuración 
+[Volver al principio](#arriba)
+
+### 13.1. Lectura del fichero de configuración 
 
 ```python
 # Lectura del fichero de configuración
@@ -344,7 +420,10 @@ A partir de este momento el valor de cualquier parámetro es accesible mediante 
 ```python
 valor_parametro = config.get('sección', 'nombre_parámetro')
 ```
-### 14.2. Carga de localizaciones de muestreo
+
+[Volver al principio](#arriba)
+
+### 13.2. Carga de localizaciones de muestreo
 
 El fichero de texto que contiene esta información es un CSV que viene referenciado por el parámetro *locations_file* dentro de la sección *paths*. Tiene
 - ';' como carácter separador de campos.
@@ -372,7 +451,9 @@ Leída la información, se muestra su ubicación en un mapa.
 
 ![Localizaciones de muestreo](/sample_images/localizaciones_de_muestreo.jpg)
 
-### 14.3. Descarga y procesado de la información sobre precipitación
+[Volver al principio](#arriba)
+
+### 13.3. Descarga y procesado de la información sobre precipitación
 
 El paso siguiente consiste en la descarga del paquete de datos sobre el histórico de precipitaciones.
 
@@ -409,7 +490,9 @@ Como objetivo final, el Notebook genera dos ficheros en formato CSV. Uno para la
 - fecha de medida de precipitación
 - campos con el campo *location_label* (dado en el fichero *config.ini*) que identifican de forma unívoca la localización de muestreo.
   
-### 14.4. Descarga y procesado de datos piezométricos
+[Volver al principio](#arriba)
+
+### 13.4. Descarga y procesado de datos piezométricos
 
 Se aplica un proceso similar al caso de la precipitación.
 
@@ -444,4 +527,4 @@ Finalmente, la siguiente figura muestra sobre un mapa la distribución espacial 
 
 Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. A diferencia de los ficheros de salida de precipitación, no todos los puntos de muestreo se representan en el fichero de salida de piezometría. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius* en metros.
 
-
+[Volver al principio](#arriba)
