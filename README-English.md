@@ -295,8 +295,8 @@ Project link: https://webwp.igme.es/sarai/index.php/en/home/
 
 We would like to thank 
 
-- AEMET (https://www.aemet.es/) for the precipitation data used in this notebook.
-- MINECO (https://www.miteco.gob.es/) because of the piezometric information used in this work.
+- **AEMET** (https://www.aemet.es/) for the precipitation data used in this notebook.
+- **General Directorate of Water** (https://www.miteco.gob.es/) because of the piezometric information used in this work.
 
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
 

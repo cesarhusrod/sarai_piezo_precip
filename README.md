@@ -359,8 +359,8 @@ Enlace al proyecto: https://webwp.igme.es/sarai/index.php/en/home/
 
 Nos gustaría agradecer
 
-- AEMET (https://www.aemet.es/), por facilitar los datos de precipitación usados en este Notebook.
-- MINECO (https://www.miteco.gob.es/) , por proporcionar la información sobre estaciones piezométricas y sus mediciones que han sido usadas en este trabajo.
+- a la **AEMET** (https://www.aemet.es/), por facilitar los datos de precipitación usados en este Notebook.
+- a la **Dirección General del Agua**, integrada en el Ministerio para la Transición Ecológica y el Reto Demográfico (MITECO)  (https://www.miteco.gob.es/) , por proporcionar la información sobre estaciones piezométricas y sus mediciones que han sido usadas en este trabajo.
 
 
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
