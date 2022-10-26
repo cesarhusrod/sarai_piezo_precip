@@ -194,8 +194,8 @@ La siguiente tabla muestra los parámetros actualmente personalizables en el fic
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | paths       |    locations_file    |    Texto     |                                                                                                                                                                                                                                                                                                                                                                       Ruta al fichero de texto en formato CSV que contiene información sobre los puntos de muestreo. |                                                                                                                                                                  Point_Sampling_Murcia_desc.txt |
 | paths       |  out_closest_prepic  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de precipitación asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_precipitaciones_punto_mas_cercano.csv |
-| paths       |  out_interp_precip   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de precipitación para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de precipitación dentro de una distancia máxima, que está determinada por el parámetro *radius*. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_precipitaciones_ponderado_distancia.csv |
-| paths       |   out_longer_piezo   |    Texto     | Nombre del fichero de salida en formato CSV que contendrá los datos de piezometría asociados a los puntos de muestreo. Habrá medidas siempre que la distancia entre punto de muestreo y punto de medida piezométrico sea inferior a la distancia dada por el parámetro *radius*. Si hay varios puntos con medidas piezométricas, se asocia el que tenga la serie temporal más larga. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                                      historico_piezometrias.csv |
+| paths       |  out_interp_precip   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de precipitación para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de precipitación dentro de una distancia máxima, que está determinada por el parámetro *radius_precip*. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_precipitaciones_ponderado_distancia.csv |
+| paths       |   out_longer_piezo   |    Texto     | Nombre del fichero de salida en formato CSV que contendrá los datos de piezometría asociados a los puntos de muestreo. Habrá medidas siempre que la distancia entre punto de muestreo y punto de medida piezométrico sea inferior a la distancia dada por el parámetro *radius_piezo*. Si hay varios puntos con medidas piezométricas, se asocia el que tenga la serie temporal más larga. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                                      historico_piezometrias.csv |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | computation |     pow_distance     |   Numérico   |                                                                                                                                                                                                                                                                                                                                                                   Potencia a la que se eleva el inverso de la distancia cuando se calcula la precipitación promedio. |                                                                                                                                                                                             1.0 |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -306,7 +306,7 @@ El Notebook, descarga, descomprime y lee la base de datos. Como salida, genera d
 
 ## 7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría
 
-Sólo las fuentes de datos de piezometría y precipitación cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La distancia máxima en metros se establece en el parámetro *radius*, en el fichero *config.ini*. 
+Sólo las fuentes de datos de piezometría y precipitación cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La **distancia máxima en metros** se establece en los parámetros *radius_piezo* y *radius_precip*, en el fichero *config.ini*. 
 
 
 [Volver al principio](#arriba)
@@ -316,7 +316,7 @@ Sólo las fuentes de datos de piezometría y precipitación cercanas a las local
 Para la asociación entre localizaciones de muestreo y puntos de medida de precipitación, se aplican dos criterios:
 
 1. Asignación directa de la precipitación del punto más cercano con medidas a cada localización de muestreo.
-2. Asignación de la media de la precipitación ponderada por el inverso de la distancia entre la localización de muestero y los puntos con medidas de precipitación dentro de un área circular centrada en el punto de muestreo y de radio pr el parámetro *radius* en metros.
+2. Asignación de la media de la precipitación ponderada por el inverso de la distancia entre la localización de muestero y los puntos con medidas de precipitación dentro de un área circular centrada en el punto de muestreo y de radio por el parámetro *radius_precip* en metros.
    
 [Volver al principio](#arriba)
 
@@ -324,7 +324,7 @@ Para la asociación entre localizaciones de muestreo y puntos de medida de preci
 
 Sólo se asocia siguiendo el siguiente criterio:
 
-1. Se selecciona la serie piezométrica más larga de entre las ubicaciones de los piezómetros más cercanos a cada localización de muestreo (buffer circular centrado en el punto de muestreo y radio máximo dado por el parámetro *radius*).
+1. Se selecciona la serie piezométrica más larga de entre las ubicaciones de los piezómetros más cercanos a cada localización de muestreo (buffer circular centrado en el punto de muestreo y radio máximo dado por el parámetro *radius_piezo*).
 
 [Volver al principio](#arriba)
 
@@ -338,7 +338,7 @@ Los ficheros de salida más importantes:
 (parámetro *out_interp_precip*, con valor por defecto *historico_precipitaciones_ponderado_distancia.csv*). 
 - Las medidas de precipitación histórica corresponden a la del punto con medida de precipitación más cercana a cada localización de interés ( dado por el parámetro *out_closest_prepic*, con valor por defecto *historico_precipitaciones_punto_mas_cercano.csv*). 
 
-- las medidas con mayor duración temporal para cada punto de localización a distancia inferior a la dada por el parámetro *radius*. Si no hay piezómetros en ese radio, no se asigna medida a la localización de muestreo ( dado por el parámetro *out_longer_piezo*, con valor por defecto *historico_piezometrias.csv*).
+- las medidas con mayor duración temporal para cada punto de localización a distancia inferior a la dada por el parámetro *radius_piezo*. Si no hay piezómetros en ese radio, no se asigna medida a la localización de muestreo ( dado por el parámetro *out_longer_piezo*, con valor por defecto *historico_piezometrias.csv*).
 
 - Adicionalmente, también se guardan todas las imágenes y gráficas generadas por el Notebook en forma de ficheros JPG.
 
@@ -512,7 +512,7 @@ Filtrando al área de estudio obtenemos el siguiente suconjunto de puntos con me
 ![Puntos de muestreo y el subconjunto de interés de las ubicaciones de los piezómetros](/sample_images/piezometros_en_zona_de_muestreo.jpg)
 
 A la hora de realizar la asociación entre puntos de medida piezométrica y localizaciones de muestreo, se establecen pares entre puntos
-- cuya distancia entre ellos sean menor que la dada por el valor del parámetro *radius* (en el fichero *config.ini*) medida en metros.
+- cuya distancia entre ellos sean menor que la dada por el valor del parámetro *radius_piezo* (en el fichero *config.ini*) medida en metros.
 - si hay varios puntos que cumplen la anterior condición de distancia, se selecciona aquel cuya serie temporal de medidas piezométricas sea la más larga.
 
 La siguiente imagen muestra los piezómetros relacionados con las ubicaciones de muestreo.
@@ -532,6 +532,6 @@ Finalmente, la siguiente figura muestra sobre un mapa la distribución espacial 
 
 ![Sampling locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
 
-Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. A diferencia de los ficheros de salida de precipitación, no todos los puntos de muestreo se representan en el fichero de salida de piezometría. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius* en metros.
+Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. A diferencia de los ficheros de salida de precipitación, no todos los puntos de muestreo se representan en el fichero de salida de piezometría. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius_piezo* en metros.
 
 [Volver al principio](#arriba)
