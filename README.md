@@ -1,10 +1,8 @@
-<a id="arriba"></a> 
-
+<a id="arriba"></a>
 
 ![Funding Ministery](/sample_images/ministerio_ciencia_logo.jpg)
 
-
-- [Precipitación y piezometría en SARAI](#precipitación-y-piezometría-en-sarai)
+- [Precipitación, temperatura máxima y mínima y piezometría en SARAI](#precipitación-temperatura-máxima-y-mínima-y-piezometría-en-sarai)
   - [1. Introducción](#1-introducción)
   - [2. Metodología](#2-metodología)
   - [3. Descarga del código](#3-descarga-del-código)
@@ -16,9 +14,10 @@
   - [6. Fuentes de datos](#6-fuentes-de-datos)
     - [6.1. Localizaciones de muestreo](#61-localizaciones-de-muestreo)
     - [6.2. Medidas de precipitación](#62-medidas-de-precipitación)
-    - [6.3. Medidas de piezometría](#63-medidas-de-piezometría)
-  - [7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría](#7-criterios-de-asociación-entre-las-localizaciones-de-muestreo-y-las-medidas-de-precipitación-y-piezometría)
-    - [7.1. Precipitación](#71-precipitación)
+    - [6.3. Medidas de temperatura máxima y mínima](#63-medidas-de-temperatura-máxima-y-mínima)
+    - [6.4. Medidas de piezometría](#64-medidas-de-piezometría)
+  - [7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación, temperaturas y piezometría](#7-criterios-de-asociación-entre-las-localizaciones-de-muestreo-y-las-medidas-de-precipitación-temperaturas-y-piezometría)
+    - [7.1. Precipitación y temperaturas](#71-precipitación-y-temperaturas)
     - [7.2. Piezometría](#72-piezometría)
   - [8. Ficheros de salida](#8-ficheros-de-salida)
   - [9. Agradecimientos](#9-agradecimientos)
@@ -30,13 +29,11 @@
     - [13.2. Carga de localizaciones de muestreo](#132-carga-de-localizaciones-de-muestreo)
     - [13.3. Descarga y procesado de la información sobre precipitación](#133-descarga-y-procesado-de-la-información-sobre-precipitación)
     - [13.4. Descarga y procesado de datos piezométricos](#134-descarga-y-procesado-de-datos-piezométricos)
-
-# Precipitación y piezometría en SARAI
-
+# Precipitación, temperatura máxima y mínima y piezometría en SARAI
 
 ## 1. Introducción
 
-El objetivo de este Notebook es completar la información disponible sobre ciertos lugares de muestreo con datos de precipitación y piezometría. 
+El objetivo de este Notebook es completar la información disponible sobre ciertos lugares de muestreo con datos de precipitación, temperaturas máximas y mínimas y piezometría.
 
 [Volver al principio](#arriba)
 
@@ -44,9 +41,9 @@ El objetivo de este Notebook es completar la información disponible sobre ciert
 
 Para ello, se han programado las siguientes tareas:
 
-1. Descarga de la información de medidas históricas de precipitación y piezometría de dos URLs en la web,
-2. Asociación entre las ubicaciones de muestreo y las de precipitación y piezometría según ciertos criterios y, finalmente,
-3. Generación de ficheros de texto en formato CSV que contendrán las medidas de ambas magnitudes asociadas a los lugares de muestreo.
+1. Descarga de la información de medidas históricas de precipitación, temperaturas y piezometría de cuatro URLs en la web,
+2. Asociación entre las ubicaciones de muestreo y las de precipitación, temperatura máxima y mínima, y piezometría según ciertos criterios,
+3. Generación de ficheros de texto en formato CSV que contendrán las medidas de esas cuatro magnitudes asociadas a los lugares de muestreo.
 
 [Volver al principio](#arriba)
 
@@ -58,7 +55,7 @@ Lo siguiente es abrir la consola de GIT (en el caso de trabajar en Windows) o la
 
 ```git clone https://git.igme.es/chusillos/sarai_piezo_precip.git```
 
-Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecutado el comando anterior de nombre *sarai_piezo_precip*. Incluye todo el código necesario y los ficheros de ejemplo. Así de simple.
+Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecutado el comando anterior de nombre *sarai_piezo_precip*. Incluye todo el código necesario y los ficheros de ejemplo.
 
 [Volver al principio](#arriba)
 
@@ -69,11 +66,11 @@ El proceso es sencillo:
 1. Instale [anaconda](https://www.anaconda.com/) en su ordenador.
 2. Instale el entorno de ejecución definido en el fichero *environment_sarai.yml* usando la interfaz de administración de *Anaconda.Navigator*.
 
-Tras realizar estas operaciones, podrá 
+Tras realizar estas operaciones, podrá
 
-- cargar el nuevo entorno, 
-- lanzar la aplicación de Jupyter Notebook en su navegador, 
-- cargar el fichero de código (*precipitacion_y_piezometria.ipynb*) y 
+- cargar el nuevo entorno,
+- lanzar la aplicación de Jupyter Notebook en su navegador,
+- cargar el fichero de código (*precipitacion_y_piezometria.ipynb*) y
 - ejecutarlo sin problemas.
 
 [Volver al principio](#arriba)
@@ -89,14 +86,14 @@ Explicamos el proceso paso a paso. Ilustramos cada uno de ellos con una captura 
 ![Interfaz de administración de entornos de Anaconda.Navigator](/sample_images/environment/administracion_entornos_anaconda.jpg)
 
 3. Seleccione la opción *Local drive* y busque en su disco el directorio donde ha descargado el repositorio. Ahí encontrará el fichero *environment_sarai.yml*. Lo siguiente es poner un nombre al nuevo entorno que creará y presionar el botón *Import*. En la siguiente figura, hemos nombrado el entorno a crear como *sarai*.
-   
+
 ![Anaconda: cómo importar un entorno](/sample_images/environment/importar_entorno_sarai.jpg)
 
-4. Haga clic sobre el nuevo entorno para activarlo. 
-   
+4. Haga clic sobre el nuevo entorno para activarlo.
+
 ![Nuevo entorno llamado sarai entre los disponibles en Anaconda](/sample_images/environment/entorno_sarai_instalado.jpg)
 
-Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de su nuevo entorno. Ahora, el entorno llamado en este ejemplo *sarai* está activo y listo para su uso. 
+Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de su nuevo entorno. Ahora, el entorno llamado en este ejemplo *sarai* está activo y listo para su uso.
 
 ![Entorno sarai activo en Anaconda](/sample_images/environment/entorno_sarai_activado.jpg)
 
@@ -104,16 +101,16 @@ Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de
 
 ![Cómo se lanza la aplicación de Jupyter Notebook en Anaconda](/sample_images/environment/lanzar_notebook_en_entorno_sarai.jpg)
 
-6. Tras lanzar la aplicación de *Jupyter Notebook*, se abrirá una pestaña en su navegador web predeterminado. 
-   
+6. Tras lanzar la aplicación de *Jupyter Notebook*, se abrirá una pestaña en su navegador web predeterminado.
+
 ![Interfaz web de Jupyter notebook funcionando](/sample_images/environment/notebook_en_entorno_sarai_operativo.jpg)
 
 7. Seleccione la ruta donde haya descargado el repositorio de *sarai* haciendo clic sobre los subdirectorios disponibles en *Anaconda.Navigator*. Después, haga clic sobre el fichero del Notebook de *sarai* (*precipitacion_y_piezometria.ipynb*).
-   
+
 ![Selección de Notebook en la interfaz web de Jupyter Notebook](/sample_images/environment/seleccion_notebook_en_entorno_sarai.jpg)
 
-8. Finalmente, su Notebook está cargado en el navegador. 
-   
+8. Finalmente, su Notebook está cargado en el navegador.
+
 ![Notebook de SARAI preparado para su edición y ejecución en su navegador](/sample_images/environment/cargado_notebook_en_entorno_sarai.jpg)
 
 ¡Enhorabuena! Ya puede ejecutar el código de las celdas de notebook o editar el código que personalizar.
@@ -124,11 +121,10 @@ Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de
 
 Este fichero en formato texto es muy importante. Se llama **config.ini**.  
 
+El fichero *config.ini* está disponible en el directorio base del repositorio. Se usa para establecer todos los parámetros del Notebook, de forma que lo hace adaptable a diferentes ficheros de entrada/salida. Entre sus opciones, hace posible que
 
-El fichero *config.ini* está disponible en el directorio base del repositorio. Se usa para establecer todos los parámetros del Notebook, de forma que lo hace adaptable a diferentes ficheros de entrada y al gusto del usuario. Entre sus opciones, permite que
-
-- los ficheros de entrada pueden tener cualquier nombre para los campos relevantes,
-- las coordenadas de los puntos  puedan venir dadas en diferentes sistemas de referencia,
+- los ficheros de entrada puedan tener cualquier nombre para los campos relevantes,
+- las coordenadas de los puntos puedan venir dadas en diferentes sistemas de referencia,
 - se pueda establecer el sistema de referencia de salida,
 - los directorios de descarga de información y de destino puedan personalizarse.
 
@@ -143,16 +139,16 @@ Las filas del fichero *config.ini* son de dos tipos:
 - Línea de sección.
   
    Se emplea para agrupar los parámetros por temática o funcionalidad. Facilita la localización de los parámetros en el fichero cuando su número es elevado. Su sintaxis es
-      
+
       [Nombre de sección]
-      
+
 - Línea de parámetro.
 
    En ella se definen:
-   
-   - el nombre del parámetro,
-   - el valor del parámetro, y
-   - de forma opcional, puede incluir una breve descripción del parámetro. Se escribe después de un espacio en blanco (' ') y de una almohadilla ('#').
+
+  - el **nombre** del parámetro,
+  - el **valor** del parámetro, y
+  - de forma opcional, puede incluir una breve **descripción** del parámetro. Se escribe después de un espacio en blanco (' ') y de una almohadilla ('#').
   
    La sintaxis completa tiene la forma:
 
@@ -170,19 +166,19 @@ Las filas del fichero *config.ini* son de dos tipos:
 
     en las que el parámetro existe, pero no se le ha dado ningún valor. El Notebook consulta los valores asignados a los diferentes parámetros y, en caso de encontrar valores vacíos, ejecuta un código alternativo.
 
-Los valores por defecto de los parámetros permiten ejecutar sin errores todas las celdas del Notebook. En caso de modificar esos valores, tenga en cuenta que con la actual implementación:
+Los valores por defecto de los establecidos permiten ejecutar sin errores todas las celdas del Notebook para el fichero de entrada de ejemplo.
 
-   - Sólo es válido un valor por cada parámetro.
-   - Todos los valores que se establezcan son considerados como cadenas de caracteres por el Notebook, aunque contengan valores numéricos.
-   - Las celdas que procesan la descarga de ficheros desde URLs en la web están codificadas específicamente para los valores asignados por defecto (modo de empaquetado y compresión, nombre, número y formato de ficheros contenidos...). Si cambia esas URLs, tendrá que adaptar el código que procesa los ficheros o paquetes que desee descargar.
+En caso de modificar esos valores, tenga en cuenta que con la actual implementación:
 
+- Sólo es válido un valor por cada parámetro.
+- Todos los valores que se establezcan son considerados como cadenas de caracteres por el Notebook, aunque contengan valores numéricos.
+- Las celdas que procesan la descarga de ficheros desde URLs en la web están codificadas específicamente para los valores asignados por defecto (modo de empaquetado y compresión, nombre, número y formato de ficheros contenidos...). Si cambia esas URLs, tendrá que adaptar el código que procesa los ficheros o paquetes que desee descargar.
 
 [Volver al principio](#arriba)
 
-### 5.2. Parámetros y valores por defecto 
+### 5.2. Parámetros y valores por defecto
 
 La siguiente tabla muestra los parámetros actualmente personalizables en el fichero *config.ini*:
-
 
 | Sección     | Nombre de parámetro  | Tipo de dato |                                                                                                                                                                                                                                                                                                                                                                                                                                                          Descripción |                                                                                                                                                                               Valor por defecto |
 | :---------- | :------------------: | :----------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -190,16 +186,26 @@ La siguiente tabla muestra los parámetros actualmente personalizables en el fic
 | directories |      output_dir      |    Texto     |                                                                                                                                                                                                                                                                                       Directorio de salida. Aquí guardarán los ficheros de texto CSV con información de precipitación y piezometría. También almacenará todas las figuras generadas por el Notebook. |                                                                                                                                                                                       ./results |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | urls        |    piezometry_url    |    Texto     |                                                                                                                                                                                                                                                                                                                                                                                                         Dirección web del paquete que contiene datos de piezometría. |                                                                  [enlace piezometría](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip) (ZIP) |
+| urls        |    tempmax_url    |    Texto     |                                                                                                                                                                                                                                                                                                                                                                                                         Dirección web del paquete que contiene datos de temperatura máxima. |                                                                  [enlace Tmax](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmax/Serie_AEMET_v1_tmax_1951a2021_txt.tar.gz) (TAR.GZ) |
+| urls        |    tempmin_url    |    Texto     |                                                                                                                                                                                                                                                                                                                                                                                                         Dirección web del paquete que contiene datos de temperatura mínima. |                                                                  [enlace Tmin](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmin/Serie_AEMET_v1_tmin_1951a2021_txt.tar.gz) (TAR.GZ) |
 | urls        |  precipitations_url  |    Texto     |                                                                                                                                                                                                                                                                                                                                                                                                   Dirección web del paquete que contiene los datos de precipitación. | [enlace precipitaciones](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz) (TAR.GZ) |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | paths       |    locations_file    |    Texto     |                                                                                                                                                                                                                                                                                                                                                                       Ruta al fichero de texto en formato CSV que contiene información sobre los puntos de muestreo. |                                                                                                                                                                  Point_Sampling_Murcia_desc.txt |
-| paths       |  out_closest_prepic  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de precipitación asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_precipitaciones_punto_mas_cercano.csv |
+| paths       |  out_closest_precip  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de precipitación asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_precipitaciones_punto_mas_cercano.csv |
 | paths       |  out_interp_precip   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de precipitación para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de precipitación dentro de una distancia máxima, que está determinada por el parámetro *radius_precip*. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_precipitaciones_ponderado_distancia.csv |
+| paths       |  out_closest_precip  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de precipitación asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_precipitaciones_punto_mas_cercano.csv |
+| paths       |  out_interp_precip   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de precipitación para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de precipitación dentro de una distancia máxima, que está determinada por el parámetro *radius_precip*. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_precipitaciones_ponderado_distancia.csv |
+| paths       |  out_closest_tmax  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de temperatura máxima asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_tmax_punto_mas_cercano.csv |
+| paths       |  out_interp_tmax   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de temperatura máxima para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de temperatura dentro de una distancia máxima (fijada por el parámetro *radius_tmax*). Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_tmax_ponderado_distancia.csv |
+| paths       |  out_closest_tmin  |    Texto     |                                                                                                                                                                                                                                            Nombre del fichero de texto en formato CSV.  Contendrá los datos de temperatura mínima asociados mediante el algoritmo de puntos más próximos. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                 historico_tmin_punto_mas_cercano.csv |
+| paths       |  out_interp_tmin   |    Texto     |                                                                      Nombre del fichero de texto en formato CSV. Los datos de temperatura mínima para cada punto de muestreo se determinan mediante la media ponderada por el inverso de la distancia a los puntos que contienen medidas de temperatura dentro de una distancia máxima (fijada por el parámetro *radius_tmin*). Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                               historico_tmin_ponderado_distancia.csv |
 | paths       |   out_longer_piezo   |    Texto     | Nombre del fichero de salida en formato CSV que contendrá los datos de piezometría asociados a los puntos de muestreo. Habrá medidas siempre que la distancia entre punto de muestreo y punto de medida piezométrico sea inferior a la distancia dada por el parámetro *radius_piezo*. Si hay varios puntos con medidas piezométricas, se asocia el que tenga la serie temporal más larga. Se guarda en el directorio de salida establecido por el parámetro *output_dir*. |                                                                                                                                                                      historico_piezometrias.csv |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | computation |     pow_distance     |   Numérico   |                                                                                                                                                                                                                                                                                                                                                                   Potencia a la que se eleva el inverso de la distancia cuando se calcula la precipitación promedio. |                                                                                                                                                                                             1.0 |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | buffer      |    radius_precip     |   Numérico   |                                                                                                                                                                                                                                                                                                      Distancia máxima (en metros) entre los puntos de muestreo y los puntos con medición de precipitación. Si tiene valores decimales, se separan con un punto ('.') |                                                                                                                                                                                            5000 |
+| buffer      |    radius_tmax     |   Numérico   |                                                                                                                                                                                                                                                                                                      Distancia máxima (en metros) entre los puntos de muestreo y los puntos con medición de temperatura máxima. Si tiene valores decimales, se separan con un punto ('.') |                                                                                                                                                                                            5000 |
+| buffer      |    radius_tmin     |   Numérico   |                                                                                                                                                                                                                                                                                                      Distancia máxima (en metros) entre los puntos de muestreo y los puntos con medición de temperatura mínima. Si tiene valores decimales, se separan con un punto ('.') |                                                                                                                                                                                            5000 |
 | buffer      |     radius_piezo     |   Numérico   |                                                                                                                                                                                                                                                                                                        Distancia máxima (en metros) entre los puntos de muestreo y los puntos con medición de piezometría. Si tiene valores decimales, se separan con un punto ('.') |                                                                                                                                                                                            5000 |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | fields      |     location_id      |    Texto     |                                                                                                                                                                                                                                                                                                           Nombre del campo en el fichero de localizaciones de muestreo (*locations_file*) cuyos valores identifican de forma unívoca a cada una de esas ubicaciones. |                                                                                                                                                                                             FID |
@@ -210,10 +216,20 @@ La siguiente tabla muestra los parámetros actualmente personalizables en el fic
 | fields      |  location_lat_proj   |    Texto     |                                                                                                                                                                                                                                                    Nombre del campo del fichero de localizaciones de muestreo (*locations_file*) que contiene la latitud proyectada de cada una de ellas (el sistema de referencia está dado por el parámetro *location_projected*). |                                                                                                                                                                                      Lat_ETRS89 |
 | fields      | location_geom_rename |    Texto     |                                                                                                                                                                                                                                                           Si existe en el fichero de entrada (*locations_file*) un campo llamado *GEOMETRY*, será renombrado al valor de este parámetro para que no interfiera con el campo del mismo nombre que genera el Notebook. |                                                                                                                                                                                    GEOMETRY_SAT |
 | fields      |     precip_date      |    Texto     |                                                                                                                                                                                                                                                                                                     Nombre del campo que contiene las fechas en las que se registraron las medidas de precipitación (dentro del fichero dado por el parámetro *precipitations_url*). |                                                                                                                                                                                           fecha |
+| fields      |     tmax_date      |    Texto     |                                                                                                                                                                                                                                                                                                     Nombre del campo que contiene las fechas en las que se registraron las medidas de temperatura máxima (dentro del fichero dado por el parámetro *tempmax_url*). |                                                                                                                                                                                           fecha |
+| fields      |     tmin_date      |    Texto     |                                                                                                                                                                                                                                                                                                     Nombre del campo que contiene las fechas en las que se registraron las medidas de temperatura mínima (dentro del fichero dado por el parámetro *tempmin_url*). |                                                                                                                                                                                           fecha |
 | fields      |    precip_lon_geo    |    Texto     |                                                                                                                                                                                                                                                                                  Nombre del campo que contiene la longitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_geographic*). |                                                                                                                                                                                       longitude |
 | fields      |    precip_lat_geo    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la latitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_geographic*). |                                                                                                                                                                                        latitude |
-| fields      |   precip_lon_proj    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la longitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
-| fields      |   precip_lat_proj    |    Texto     |                                                                                                                                                                                                                                                                                    Nombre del campo que contiene la latitud geográfica de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
+| fields      |   precip_lon_proj    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la longitud proyectada de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
+| fields      |   precip_lat_proj    |    Texto     |                                                                                                                                                                                                                                                                                    Nombre del campo que contiene la latitud proyectada de cada punto de medida de precipitación (dado por el sistema de referencia establecido por el parámetro *precip_projected*). |                                                                                                                                                                                                 |
+| fields      |    tmax_lon_geo    |    Texto     |                                                                                                                                                                                                                                                                                  Nombre del campo que contiene la longitud geográfica de cada punto de medida de temperatura máxima (dado por el sistema de referencia establecido por el parámetro *tmax_geographic*). |                                                                                                                                                                                       longitude |
+| fields      |    tmax_lat_geo    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la latitud geográfica de cada punto de medida de temperatura máxima (dado por el sistema de referencia establecido por el parámetro *tmax_geographic*). |                                                                                                                                                                                        latitude |
+| fields      |   tmax_lon_proj    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la longitud proyectada de cada punto de medida de temperatura máxima (dado por el sistema de referencia establecido por el parámetro *tmax_projected*). |                                                                                                                                                                                                 |
+| fields      |   tmax_lat_proj    |    Texto     |                                                                                                                                                                                                                                                                                    Nombre del campo que contiene la latitud proyectada de cada punto de medida de temperatura máxima (dado por el sistema de referencia establecido por el parámetro *tmax_projected*). |                                                                                                                                                                                                 |
+| fields      |    tmin_lon_geo    |    Texto     |                                                                                                                                                                                                                                                                                  Nombre del campo que contiene la longitud geográfica de cada punto de medida de temperatura mínima (dado por el sistema de referencia establecido por el parámetro *tmin_geographic*). |                                                                                                                                                                                       longitude |
+| fields      |    tmin_lat_geo    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la latitud geográfica de cada punto de medida de temperatura mínima (dado por el sistema de referencia establecido por el parámetro *tmin_geographic*). |                                                                                                                                                                                        latitude |
+| fields      |   tmin_lon_proj    |    Texto     |                                                                                                                                                                                                                                                                                   Nombre del campo que contiene la longitud proyectada de cada punto de medida de temperatura mínima (dado por el sistema de referencia establecido por el parámetro *tmin_projected*). |                                                                                                                                                                                                 |
+| fields      |   tmin_lat_proj    |    Texto     |                                                                                                                                                                                                                                                                                    Nombre del campo que contiene la latitud proyectada de cada punto de medida de temperatura mínima (dado por el sistema de referencia establecido por el parámetro *tmin_projected*). |                                                                                                                                                                                                 |
 | fields      |       piezo_id       |    Texto     |                                                                                                                                                                                                                                                                                                              Nombre del campo que identifica de forma unívoca a cada piezómetro. Dicha información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                          IDPIEZ |
 | fields      |      piezo_date      |    Texto     |                                                                                                                                                                                                                                                                                                                               Nombre del campo que establece la fecha de toma de medida piezométrica. Es parte del paquete apuntado por el fichero *piezometry_url*. |                                                                                                                                                                                          FechaP |
 | fields      |    piezo_lon_geo     |    Texto     |                                                                                                                                                                                                                        Nombre del campo que almacena la longitud de la ubicación de los piezómetros. El sistema de referencia usado viene dado por el parámetro *piezo_geographic*. La información se extrae del paquete apuntado por el parámetro *piezometry_url*. |                                                                                                                                                                                                 |
@@ -226,51 +242,62 @@ La siguiente tabla muestra los parámetros actualmente personalizables en el fic
 | crs         |  location_projected  |    Texto     |                                                                                                                                                                                                                                                                                                                                                 Sistema de referencia para las coordenadas proyectadas del fichero de localizaciones de muestreo (*locations_file*). |                                                                                                                                                                                      EPSG:25830 |
 | crs         |  precip_geographic   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas geográficas del fichero de precipitaciones (dentro del paquete referenciado por el parámetro *precipitations_url*). |                                                                                                                                                                                       EPSG:4326 |
 | crs         |   precip_projected   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas proyectadas del fichero de precipitaciones (dentro del paquete referenciado por el parámetro *precipitations_url*). |                                                                                                                                                                                      EPSG:25830 |
+| crs         |  tmax_geographic   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas geográficas del fichero de temperaturas máximas (dentro del paquete referenciado por el parámetro *tempmax_url*). |                                                                                                                                                                                       EPSG:4326 |
+| crs         |   tmax_projected   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas proyectadas del fichero de temperaturas máximas (dentro del paquete referenciado por el parámetro *tempmax_url*). |                                                                                                                                                                                      EPSG:25830 |
+| crs         |  tmin_geographic   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas geográficas del fichero de temperaturas mínimas (dentro del paquete referenciado por el parámetro *tempmin_url*). |                                                                                                                                                                                       EPSG:4326 |
+| crs         |   tmin_projected   |    Texto     |                                                                                                                                                                                                                                                                                                       Sistema de referencia para las coordenadas proyectadas del fichero de temperaturas mínimas (dentro del paquete referenciado por el parámetro *tempmin_url*). |                                                                                                                                                                                      EPSG:25830 |
 | crs         |   piezo_geographic   |    Texto     |                                                                                                                                                                                                                                                                                                     Sistema de referencia para las coordenadas geográficas del fichero de medidas piezométricas (dentro del paquete referenciado por el parámetro *piezometry_url*). |                                                                                                                                                                                       EPSG:4326 |
 | crs         |   piezo_projected    |    Texto     |                                                                                                                                                                                                                                                                                                     Sistema de referencia para las coordenadas proyectadas del fichero de medidas piezométricas (dentro del paquete referenciado por el parámetro *piezometry_url*). |                                                                                                                                                                                      EPSG:25830 |
 | crs         |   final_projected    |    Texto     |                                                                                                                                                                                                                                                                                Sistema de referencia proyectado para todos los resultados obtenidos por el Notebook. Cualquier sistema de referencia de entrada (proyectados o geográficos) se transformarán a éste. |                                                                                                                                                                                      EPSG:25830 |
 |             |                      |              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                 |
 
-<sup>1</sup> [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip) (ZIP)
+<sup>1</sup>Datos de piezometría: [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip) (ZIP)
 
-<sup>2</sup> [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz) (TAR.GZ)
+<sup>2</sup> Datos de precipitación: [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2021_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2021_txt.tar.gz) (TAR.GZ)
 
+<sup>3</sup> Datos de temperatura máxima: [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmax/Serie_AEMET_v1_tmax_1951a2021_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmax/Serie_AEMET_v1_tmax_1951a2021_txt.tar.gz) (TAR.GZ)
+
+<sup>4</sup> Datos de temperatura mínima: [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmin/Serie_AEMET_v1_tmin_1951a2021_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/temperatura/v1/tmin/Serie_AEMET_v1_tmin_1951a2021_txt.tar.gz) (TAR.GZ)
 
 [Volver al principio](#arriba)
+
 
 
 ## 6. Fuentes de datos
 
 El Notebook está pensado para tratar con:
-- una fuente de datos interna, dada por un fichero de entrada que determina los puntos de muestreo. 
-- dos fuentes de datos externas, disponibles a través de internet, que contienen información sobre
+
+- una fuente de datos interna, dada por un fichero de entrada que determina los puntos de muestreo.
+- cuatro fuentes de datos externas, disponibles a través de internet, que contienen información sobre
   - precipitación (*precipitations_url*).
+  - temperatura máxima (*tempmax_url*).
+  - temperatura mínima (*tempmin_url*).
   - piezometría (*piezometry_url*).
-   
+
 [Volver al principio](#arriba)
 
 ### 6.1. Localizaciones de muestreo
-   
+
 Es nuestro fichero de texto de entrada, en formato CSV, con información sobre localizaciones de muestreo (*locations_file* en el fichero *config.ini*).
 
-Como ejemplo sencillo, se toma un caso de estudio del proyecto SARAI (https://webwp.igme.es/sarai). Cada fila define una localización de muestreo según las columnas:
+Como ejemplo sencillo, se toma un caso de estudio del proyecto SARAI (<https://webwp.igme.es/sarai>). Cada fila contiene muchos parámetros, pero los relevantes para el Notebook son aquellos que posicionan e identifican el punto de interés según las columnas:
 
-   - longitud (parámetro *location_lon*), 
-   - latitud (parámetro *location_lat*), 
-   - identificador único en el fichero (parámetro *location_id*),
-   - identificador universal ((parámetro *location_label*)).
+- longitud (parámetro *location_lon*),
+- latitud (parámetro *location_lat*),
+- identificador único en el fichero (parámetro *location_id*),
+- identificador universal ((parámetro *location_label*)).
 
-Este fichero tiene como características sintácticas:
+Este fichero tiene como **características sintácticas**:
 
-   - carácter ';' como separador de campos.
-   - carácter ',' como separador de decimales.
+- carácter ';' como separador de campos.
+- carácter ',' como separador de decimales.
 
-El fichero puede contener uno o varios pares de coordenadas (longitud, latitud) codificadas en diferentes sistemas de referencia, bien sean geográficos (*location_geographic*) o proyectados (*location_projected*). Para cada una de ellas, se especifica en el fichero *config.ini* así como el sistema de coordenadas empleado:
+El fichero puede contener uno o varios pares de coordenadas (longitud, latitud) codificadas en diferentes sistemas de referencia, bien sean geográficos (*location_geographic*) o proyectados (*location_projected*). Para cada una de ellas, se especifica en el fichero *config.ini* asi como el sistema de coordenadas empleado:
 
-   - *location_geographic* para los pares de coordenadas (*location_lon_geo*, *location_lat_geo*)
-   - *location_projected* para los pares de coordenadas (*location_lon_proj*, *location_lat_proj*)
+- *location_geographic* para los pares de coordenadas (*location_lon_geo*, *location_lat_geo*)
+- *location_projected* para los pares de coordenadas (*location_lon_proj*, *location_lat_proj*)
   
-Se tratan de la misma forma las coordenadas y sistemas de referencia dadas para las medidas de precipitación y piezometría. 
+Se tratan de la misma forma las coordenadas y sistemas de referencia dadas para las medidas de precipitación, temperatura máxima y mínima y piezometría.
 
 En caso de que los ficheros de entrada no tengan campos para algunos de los conceptos parametrizados en el fichero *config.ini*, simplemente se dejan en blanco sus valores asociados.
 
@@ -278,46 +305,51 @@ En caso de que los ficheros de entrada no tengan campos para algunos de los conc
 
 ### 6.2. Medidas de precipitación
 
-Los datos de precipitación registrados para toda la Península y Baleares entre 1951 y 2020 han sido proporcionados por la Agencia Estatal de Meteorología (AEMET). Están referenciados por el parámetro de entrada *precipitations_url* en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.tar.gz*) localizado en [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2020_txt.tar.gz). 
+Los datos de precipitación registrados para toda la Península y Baleares entre 1951 y 2021 han sido proporcionados por la **Agencia Estatal de Meteorología (AEMET)**. Están referenciados por el parámetro de entrada *precipitations_url* en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.tar.gz*) localizado en [https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2021_txt.tar.gz](https://www.aemet.es/documentos/es/serviciosclimaticos/cambio_climat/datos_diarios/dato_observacional/rejilla_5km/v2/Serie_AEMET_v2_pcp_1951a2021_txt.tar.gz).
 
 El contenido del paquete consiste en:
 
-   - un fichero llamado *README.txt*, que contiene información sobre los ficheros y su estructura y los campos que contienen los ficheros del paquete.
+- un fichero llamado *README.txt*, que contiene información sobre los ficheros y su estructura y los campos que contienen los ficheros del paquete.
 
-   - *maestro_red_hr_SPAIN.txt*, que es un fichero de texto plano con las coordenadas de los puntos de medida de precipitación y su identificador numérico.
+- *maestro_red_hr_SPAIN.txt*, que es un fichero de texto plano con las coordenadas de los puntos de medida de precipitación y su identificador numérico.
 
-   - *pcp_red_SPAIN_1951-2020.txt*, que es otro fichero de texto plano que contiene el histórico de medidas de precipitación interpolada en una malla. Tiene una resolución espacial de 5x5 km y resolución temporal de un día, desde el 01-01-1951 hasta el 31-12-2020.
+- *pcp_red_SPAIN_1951-2021.txt*, que es otro fichero de texto plano que contiene el histórico de medidas de precipitación interpolada en una malla. Tiene una resolución espacial de 5x5 km y resolución temporal de un día, desde el 01-01-1951 hasta el 31-12-2020.
 
 [Volver al principio](#arriba)
 
-### 6.3. Medidas de piezometría 
-   
+### 6.3. Medidas de temperatura máxima y mínima
+
+Siguen el mismo esquema, periodo de medición y formato que los datos de precipitación.
+
+[Volver al principio](#arriba)
+
+### 6.4. Medidas de piezometría
+
 Medidas recopiladas de la base de datos del Ministerio de Transición Ecológica y Reto Demográfico para toda la Península Ibérica y Baleares hasta 2020.
 
 Esta información viene dada a través del parámetro  *piezometry_url*, en el fichero *config.ini*. Por defecto, apunta a un fichero comprimido (*\*.zip*) con la siguiente dirección web [https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip](https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/basedatospiezometria_tcm30-533415.zip). Contiene una base de datos de Microsoft Access (.mdb). Tiene dos tablas:
 
-   - La primera contiene información de los piezómetros y su ubicación geográfica (en sistema de referencia proyectado).
+- La primera contiene información de los piezómetros y su ubicación geográfica (en sistema de referencia proyectado).
 
-   - La segunda incluye el histórico de medidas piezométricas tomadas en las ubicaciones referenciadas en la otra tabla.
+- La segunda incluye el histórico de medidas piezométricas tomadas en las ubicaciones referenciadas en la otra tabla.
   
 El Notebook, descarga, descomprime y lee la base de datos. Como salida, genera dos ficheros CSV (uno por cada tabla) para su posterior procesamiento. El hecho de generar estos ficheros CSV se justifica porque es un formato normalizado, que facilita el acceso a la información por parte de cualquier otro usuario que disponga de un simple editor de texto plano.
 
 [Volver al principio](#arriba)
 
-## 7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación y piezometría
+## 7. Criterios de asociación entre las localizaciones de muestreo y las medidas de precipitación, temperaturas y piezometría
 
-Sólo las fuentes de datos de piezometría y precipitación cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La **distancia máxima en metros** se establece en los parámetros *radius_piezo* y *radius_precip*, en el fichero *config.ini*. 
-
+Sólo las fuentes de datos de precipitación, temperatura máxima y mínima y piezometría cercanas a las localizaciones de muestreo son consideradas para completar la información del fichero original. La **distancia máxima en metros** se establece en los parámetros *radius_piezo*, *radius_tmax*, *radius_tmin* y *radius_precip*, en el fichero *config.ini*.
 
 [Volver al principio](#arriba)
 
-### 7.1. Precipitación
+### 7.1. Precipitación y temperaturas
 
-Para la asociación entre localizaciones de muestreo y puntos de medida de precipitación, se aplican dos criterios:
+Para la asociación entre localizaciones de muestreo y puntos de medida de precipitación, temperatura máxima y temperatura mínima, se aplican dos criterios:
 
-1. Asignación directa de la precipitación del punto más cercano con medidas a cada localización de muestreo.
-2. Asignación de la media de la precipitación ponderada por el inverso de la distancia entre la localización de muestero y los puntos con medidas de precipitación dentro de un área circular centrada en el punto de muestreo y de radio por el parámetro *radius_precip* en metros.
-   
+1. Asignación directa de la precipitación o temperatura del punto más cercano con medidas a cada localización de muestreo.
+2. Asignación de la media de la precipitación o temperatura ponderada por el inverso de la distancia entre la localización de muestreo y los puntos con medidas de precipitación/temperatura dentro de un área circular centrada en el punto de muestreo y de radio por el parámetro *radius_precip*/*radius_tmax*/*radius_tmin* en metros.
+
 [Volver al principio](#arriba)
 
 ### 7.2. Piezometría
@@ -330,19 +362,30 @@ Sólo se asocia siguiendo el siguiente criterio:
 
 ## 8. Ficheros de salida
 
-El Notebook los ubica en el directorio dado por el parámetro *output_dir*, en el fichero *config.ini*. Por defecto, se le ha asignado el valor *./results*, que representa un directorio llamado *results* ubicado en el mismo directorio que el fichero del Notebook. No es necesario crearlo de forma manual. El Notebook se encarga de hacerlo si no existe.
+El Notebook los ubica en el directorio dado por el parámetro *output_dir*, en el fichero *config.ini*. Por defecto, se le ha asignado el valor *./results*, que representa un directorio llamado *results* ubicado en el mismo directorio que el fichero del Notebook. No es necesario crearlo de forma manual. El código se encarga de hacerlo si no existe.
 
 Los ficheros de salida más importantes:
 
-- El histórico de precipitaciones calculadas según la media de precipitaciones ponderadas por el inverso de la distancia.
-(parámetro *out_interp_precip*, con valor por defecto *historico_precipitaciones_ponderado_distancia.csv*). 
-- Las medidas de precipitación histórica corresponden a la del punto con medida de precipitación más cercana a cada localización de interés ( dado por el parámetro *out_closest_prepic*, con valor por defecto *historico_precipitaciones_punto_mas_cercano.csv*). 
+- El histórico de precipitaciones calculadas según la media de precipitaciones ponderadas por el inverso de la distancia a cada punto de muestreo.
+(parámetro *out_interp_precip*, con valor por defecto *historico_precipitaciones_ponderado_distancia.csv*).
+
+- Las medidas de precipitación histórica corresponden a la del punto con medida de precipitación más cercana a cada localización de interés ( dado por el parámetro *out_closest_prepic*, con valor por defecto *historico_precipitaciones_punto_mas_cercano.csv*).
+
+- El histórico de temperaturas máximas calculadas según la media de las temperaturas máximas ponderadas por el inverso de la distanciaa cada punto de muestreo.
+(parámetro *out_interp_tmax*, con valor por defecto *historico_Tmax_ponderado_distancia.csv*).
+
+- Las medidas de temperatura máxima histórica corresponden a la del punto con medida de temperatura máxima más cercana a cada localización de interés ( dado por el parámetro *out_closest_tmax*, con valor por defecto *historico_Tmax_punto_mas_cercano.csv*).
+
+- El histórico de temperaturas mínimas calculadas según la media de las temperaturas mínimas ponderadas por el inverso de la distanciaa cada punto de muestreo.
+(parámetro *out_interp_tmin*, con valor por defecto *historico_Tmin_ponderado_distancia.csv*).
+
+- Las medidas de temperatura mínima histórica corresponden a la del punto con medida de temperatura mínima más cercana a cada localización de interés ( dado por el parámetro *out_closest_tmin*, con valor por defecto *historico_Tmin_punto_mas_cercano.csv*).
 
 - las medidas con mayor duración temporal para cada punto de localización a distancia inferior a la dada por el parámetro *radius_piezo*. Si no hay piezómetros en ese radio, no se asigna medida a la localización de muestreo ( dado por el parámetro *out_longer_piezo*, con valor por defecto *historico_piezometrias.csv*).
 
 - Adicionalmente, también se guardan todas las imágenes y gráficas generadas por el Notebook en forma de ficheros JPG.
 
-Los ficheros de texto que se generan relacionados con precipitación y piezometría tienen formato CSV (Valores Separados por Comas) y la siguiente estructura interna: 
+Los ficheros de texto que se generan relacionados con precipitación, temperatura máxima y mínima y piezometría tienen formato CSV (Valores Separados por Comas) y la siguiente estructura interna:
 
 *Fecha,ID1, ID2, ID3,...,IDN*
 
@@ -350,18 +393,16 @@ donde los IDs se corresponden con los valores del campo *location_label*, identi
 
 [Volver al principio](#arriba)
 
-
 ## 9. Agradecimientos
 
 Este trabajo es parte del proyecto SARAI del Ministerio de Ciencia e Innovación, con referencia PID2020-116540RB-C22 y financiado por MCIN/ AEI /10.13039/501100011033. Este trabajo ha sido desarrollado dentro del subproyecto liderado por el Instituto Geológico y Minero de España (CN IGME), como centro de investigación integrado en el Consejo Superior de Investigaciones Científicas (CSIC).
 
-Enlace al proyecto: https://webwp.igme.es/sarai/index.php/en/home/ 
+Enlace al proyecto: <https://webwp.igme.es/sarai/index.php/en/home/>
 
 Nos gustaría agradecer
 
-- a la **AEMET** (https://www.aemet.es/), por facilitar los datos de precipitación usados en este Notebook.
-- a la **Dirección General del Agua**, integrada en el Ministerio para la Transición Ecológica y el Reto Demográfico (MITECO)  (https://www.miteco.gob.es/) , por proporcionar la información sobre estaciones piezométricas y sus mediciones que han sido usadas en este trabajo.
-
+- a la **AEMET** (<https://www.aemet.es/>), por facilitar los datos de precipitación usados en este Notebook.
+- a la **Dirección General del Agua**, integrada en el Ministerio para la Transición Ecológica y el Reto Demográfico (MITECO)  (<https://www.miteco.gob.es/>) , por proporcionar la información sobre estaciones piezométricas y sus mediciones que han sido usadas en este trabajo.
 
 ![AEMET Logo](/sample_images/logo_aemet.jpg)
 
@@ -373,12 +414,12 @@ Nos gustaría agradecer
 
 Estas somos las personas que hemos llevado a cabo este trabajo:
 
-- César Husillos Rodríguez (c.husillos@igme.es), 
-- Carolina Guardiola Albert (c.guardiola@igme.es), 
+- César Husillos Rodríguez (c.husillos@igme.es),
+- Carolina Guardiola Albert (c.guardiola@igme.es),
 - Héctor Aguilera Alonso (h.aguilera@igme.es),
 - Marta Béjar Pizarro (m.bejar@igme.es)
 - Pablo Ezquerro Martín (p.ezquerro@igme.es)
-- Ángel Prieto Martín (a.prieto@igme.es). 
+- Ángel Prieto Martín (a.prieto@igme.es).
   
 Pueden contactarnos vía correo electrónico o buscarnos en GitHub.
 
@@ -390,22 +431,17 @@ DOI del repositorio: [![DOI](https://zenodo.org/badge/550928627.svg)](https://ze
 
 - GitHub: [https://github.com/cesarhusrod/sarai_piezo_precip](https://github.com/cesarhusrod/sarai_piezo_precip)
 
-
 [Volver al principio](#arriba)
-
 
 ## 11. Cómo citar este repositorio de Software
 
-
 Cesar Husillos;Carolina Guardiola-Albert;Héctor Aguilera-Alonso;Marta Béjar-Pizarro;Pablo Ezquerro; Ángel Prieto-Martín;2022, precipitacion_y_piezometria.ipynb, v1.0.0, Zenodo, doi:10.5281/zenodo.7196959, as developed on GitHub
-
 
 [Volver al principio](#arriba)
 
 ## 12. Licencia
 
 Este proyecto se ha desarrollado bajo la licencia GNU General Public License v3.0.
-
 
 [Volver al principio](#arriba)
 
@@ -415,13 +451,14 @@ Se mostrará a través de sucesivas capturas de pantalla que ilustrarán las fas
 
 [Volver al principio](#arriba)
 
-### 13.1. Lectura del fichero de configuración 
+### 13.1. Lectura del fichero de configuración
 
 ```python
 # Lectura del fichero de configuración
 config = ConfigParser(inline_comment_prefixes="#")
 config.read("config.ini" )
 ```
+
 A partir de este momento el valor de cualquier parámetro es accesible mediante la sintaxis:
 
 ```python
@@ -433,10 +470,12 @@ valor_parametro = config.get('sección', 'nombre_parámetro')
 ### 13.2. Carga de localizaciones de muestreo
 
 El fichero de texto que contiene esta información es un CSV que viene referenciado por el parámetro *locations_file* dentro de la sección *paths*. Tiene
+
 - ';' como carácter separador de campos.
 - ',' como carácter separador de decimales.
   
 El código que carga esta información en el Notebook se muestra a continuación:
+
 ```python
 # lectura el fichero de parámetros'config.ini'
 locations_file = config.get('paths', 'locations_file')
@@ -466,14 +505,13 @@ El paso siguiente consiste en la descarga del paquete de datos sobre el históri
 
 ![Localizaciones de muestreo y TODOS los puntos con información sobre la precipitación](/sample_images/todos_nodos_precipitacion_y_localizaciones_de_muestreo.jpg)
 
-Hay demasiadas fuentes no relacionadas con nuestra zona de muestreo. Simplemente filtramos al área de interés y mostramos el subconjunto el siguiente mapa. 
+Hay demasiadas fuentes no relacionadas con nuestra zona de muestreo. Simplemente filtramos al área de interés y mostramos el subconjunto el siguiente mapa.
 
 ![Localizaciones de muestreo y puntos con información sobre la precipitación](/sample_images/nodos_precipitacion_En_area_de_muestreo.jpg)
 
-
 Para la determinación de la precipitación en las ubicaciones de muestreo, hay dos algoritmos en consideración:
 
-1. calcular la media ponderada por el inverso de la distancia para los puntos con precipitación dentro de un radio máximo de distancia (en metros). 
+1. calcular la media ponderada por el inverso de la distancia para los puntos con precipitación dentro de un radio máximo de distancia (en metros).
 2. tomar las medidas del punto más cercano.
   
 Si usamos el primer método (media ponderada por el inverso de la distancia), cada localización de muestreo tendrá un número variable de nodos de precipitación cercanos. El siguiente diagrama de barras muestra esa relación.
@@ -512,11 +550,11 @@ Filtrando al área de estudio obtenemos el siguiente suconjunto de puntos con me
 ![Puntos de muestreo y el subconjunto de interés de las ubicaciones de los piezómetros](/sample_images/piezometros_en_zona_de_muestreo.jpg)
 
 A la hora de realizar la asociación entre puntos de medida piezométrica y localizaciones de muestreo, se establecen pares entre puntos
+
 - cuya distancia entre ellos sean menor que la dada por el valor del parámetro *radius_piezo* (en el fichero *config.ini*) medida en metros.
 - si hay varios puntos que cumplen la anterior condición de distancia, se selecciona aquel cuya serie temporal de medidas piezométricas sea la más larga.
 
 La siguiente imagen muestra los piezómetros relacionados con las ubicaciones de muestreo.
-
 
 ![Localizaciones de muestreo y los piezómetros con los que se relacionan](/sample_images/piezometros_seleccionados.jpg)
 
@@ -532,6 +570,8 @@ Finalmente, la siguiente figura muestra sobre un mapa la distribución espacial 
 
 ![Sampling locations associated to a given piezometer](/sample_images/localizaciones_asociadas_piezometro_2015.jpg)
 
-Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. A diferencia de los ficheros de salida de precipitación, no todos los puntos de muestreo se representan en el fichero de salida de piezometría. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius_piezo* en metros.
+Como en el caso de la precipitación, el Notebook genera un fichero CSV con las medidas piezométricas asociadas a cada punto de muestreo. 
+
+A diferencia de los ficheros de salida de precipitación, **no todos los puntos de muestreo se representan en el fichero de salida de piezometría**. La condición para su existencia es que haya un piezómetro a una distancia menor que la dada por *radius_piezo* en metros.
 
 [Volver al principio](#arriba)
