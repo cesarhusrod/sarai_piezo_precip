@@ -49,13 +49,29 @@ Para ello, se han programado las siguientes tareas:
 
 ## 3. Descarga del código
 
-Para poder hacerlo de forma sencilla, debe tener el [cliente GIT](https://git-scm.com/downloads) instalado en su ordenador.
+Recomendamos estas dos posibilidades de descarga del código:
+
+1. A través de un cliente GIT.
+
+Para seguir el procedimiento, debe tener el [cliente GIT](https://git-scm.com/downloads) instalado en su ordenador.
 
 Lo siguiente es abrir la consola de GIT (en el caso de trabajar en Windows) o la terminal (si lo hace en LINUX o MAC) y escribir la siguiente línea de código:
 
 ```git clone https://git.igme.es/chusillos/sarai_piezo_precip.git```
 
-Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecutado el comando anterior de nombre *sarai_piezo_precip*. Incluye todo el código necesario y los ficheros de ejemplo.
+Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecutado el comando anterior de nombre *sarai_piezo_precip*. Incluye todo el código necesario y los ficheros de ejemplo. Así de simple.
+
+2. Descarga de código en formato ZIP.
+
+Puede descargar el código desde la página de GitHub: 
+
+[https://github.com/cesarhusrod/sarai_piezo_precip](https://github.com/cesarhusrod/sarai_piezo_precip)
+
+siguiendo las indicaciones mostradas en la siguiente captura de pantalla.
+
+![Descaga de código del Notebook en formato ZIP](/sample_images/environment/descarga_zip_codigo_sarai.jpg)
+
+Una vez descargado su ordenador, descomprima el fichero .ZIP y tendrá acceso a los ficheros y directorios del repositorio.
 
 [Volver al principio](#arriba)
 
@@ -64,7 +80,9 @@ Eso creará una carpeta en su ordenador en la directorio desde el que ha ejecuta
 El proceso es sencillo:
 
 1. Instale [anaconda](https://www.anaconda.com/) en su ordenador.
-2. Instale el entorno de ejecución definido en el fichero *environment_sarai.yml* usando la interfaz de administración de *Anaconda.Navigator*.
+2. Arranque el programa *Anaconda.Navigator* recién instalado.
+3. Agregue el repositorio *"conda-forge"* a *Anaconda.Navigator*.
+4. Instale el entorno de ejecución definido en el fichero *environment_sarai.yml* usando la interfaz de administración de *Anaconda.Navigator*.
 
 Tras realizar estas operaciones, podrá
 
@@ -81,15 +99,28 @@ Explicamos el proceso paso a paso. Ilustramos cada uno de ellos con una captura 
 
 1. Ejecute en su ordenador el programa **Anaconda.Navigator**.
 
-2. Seleccione la pestaña de *Environments* (situada a la izquierda) y haga clic sobre el botón *Import* (abajo).
+2. Agregar el repositorio *conda-forge*.
+
+- Pulse sobre el menú *"File"*, después sobre el menú *"Preferences"*.
+
+![Acceso a las Preferencias de Anaconda](/sample_images/environment/preferencias_anaconda.jpg)
+
+- Seguidamente, pulse sobre el botón *"Configure Conda"*. En la nueva ventana de título "*Conda settings (.condarc)*", agregue la línea "*- conda-forge*" debajo de la que pone "*- defaults*" y alineada con ésta. Fñijese en la siguiente captura de pantalla.
+
+![Agregar repositorio "conda-forge" a Anaconda](/sample_images/environment/agregar-repositorio-anaconda.jpg)
+
+- Para terminar de agregar el nuevo repositorio de Anaconda, pulse sobre el botón *"Save and Restart"*. Anaconda se reiniciará y dispondrá del repositorio por defecto y de conda-forge para descargar los paquetes de Python que necesitaremos para ejecutar el código del Notebook.
+
+
+3. Seleccione la pestaña de *Environments* (situada a la izquierda) y haga clic sobre el botón *Import* (abajo).
 
 ![Interfaz de administración de entornos de Anaconda.Navigator](/sample_images/environment/administracion_entornos_anaconda.jpg)
 
-3. Seleccione la opción *Local drive* y busque en su disco el directorio donde ha descargado el repositorio. Ahí encontrará el fichero *environment_sarai.yml*. Lo siguiente es poner un nombre al nuevo entorno que creará y presionar el botón *Import*. En la siguiente figura, hemos nombrado el entorno a crear como *sarai*.
+4. Seleccione la opción *Local drive* y busque en su disco el directorio donde ha descargado el repositorio. Ahí encontrará el fichero *environment_sarai.yml*. Lo siguiente es poner un nombre al nuevo entorno que creará y presionar el botón *Import*. En la siguiente figura, hemos nombrado el entorno a crear como *sarai*.
 
 ![Anaconda: cómo importar un entorno](/sample_images/environment/importar_entorno_sarai.jpg)
 
-4. Haga clic sobre el nuevo entorno para activarlo.
+5. Haga clic sobre el nuevo entorno para activarlo.
 
 ![Nuevo entorno llamado sarai entre los disponibles en Anaconda](/sample_images/environment/entorno_sarai_instalado.jpg)
 
@@ -97,19 +128,19 @@ Fíjese que tras esta operación, se muestra un icono a la derecha del nombre de
 
 ![Entorno sarai activo en Anaconda](/sample_images/environment/entorno_sarai_activado.jpg)
 
-5. Cambie a la pestaña *Home* (en la parte izquierda de la ventana de *Anaconda.Navigator*). Ahora podrá ver todas las aplicaciones disponibles para el entorno seleccionado. Por favor, asegúrese de que su nuevo entorno está seleccionado (rectángulo verde que se muestra en la siguiente captura de pantalla). Si la opción *Jupyter notebook* está instalada, pulse bobre el botón *Launch*. Si no es el caso, primero debe pulsar sobre el botón *Install* y cuando termine la instalación, pulsar sobre el botón *Launch*.
+6. Cambie a la pestaña *Home* (en la parte izquierda de la ventana de *Anaconda.Navigator*). Ahora podrá ver todas las aplicaciones disponibles para el entorno seleccionado. Por favor, asegúrese de que su nuevo entorno está seleccionado (rectángulo verde que se muestra en la siguiente captura de pantalla). Si la opción *Jupyter notebook* está instalada, pulse bobre el botón *Launch*. Si no es el caso, primero debe pulsar sobre el botón *Install* y cuando termine la instalación, pulsar sobre el botón *Launch*.
 
 ![Cómo se lanza la aplicación de Jupyter Notebook en Anaconda](/sample_images/environment/lanzar_notebook_en_entorno_sarai.jpg)
 
-6. Tras lanzar la aplicación de *Jupyter Notebook*, se abrirá una pestaña en su navegador web predeterminado.
+7. Tras lanzar la aplicación de *Jupyter Notebook*, se abrirá una pestaña en su navegador web predeterminado.
 
 ![Interfaz web de Jupyter notebook funcionando](/sample_images/environment/notebook_en_entorno_sarai_operativo.jpg)
 
-7. Seleccione la ruta donde haya descargado el repositorio de *sarai* haciendo clic sobre los subdirectorios disponibles en *Anaconda.Navigator*. Después, haga clic sobre el fichero del Notebook de *sarai* (*precipitacion_y_piezometria.ipynb*).
+8. Seleccione la ruta donde haya descargado el repositorio de *sarai* haciendo clic sobre los subdirectorios disponibles en *Anaconda.Navigator*. Después, haga clic sobre el fichero del Notebook de *sarai* (*precipitacion_y_piezometria.ipynb*).
 
 ![Selección de Notebook en la interfaz web de Jupyter Notebook](/sample_images/environment/seleccion_notebook_en_entorno_sarai.jpg)
 
-8. Finalmente, su Notebook está cargado en el navegador.
+9. Finalmente, su Notebook está cargado en el navegador.
 
 ![Notebook de SARAI preparado para su edición y ejecución en su navegador](/sample_images/environment/cargado_notebook_en_entorno_sarai.jpg)
 
